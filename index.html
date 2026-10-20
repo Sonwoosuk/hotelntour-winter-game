@@ -1,60 +1,953 @@
-<!doctype html>
-<html lang="ko">
+
+
+
+
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="author" content="정지희 과장">
-<meta name="copyright" content="Design © 정지희 과장">
-<!-- Design © 정지희 과장 · 디자인 권한은 정지희 과장에게 있습니다 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>호텔엔투어 미리 준비하는 겨울방학</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Do+Hyeon&family=Nanum+Gothic:wght@700;800&display=swap">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<meta property="og:image" content="https://hotelntour.co.kr/image/icon/link_image.png">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<link rel="apple-touch-icon-precomposed"
+	href="https://hotelntour.co.kr/image/icon/topicon.png" />
+<meta name="robots" content="noindex,nofollow">
+<script>if(innerWidth<=768 && location.search!=="?m") location.replace("mobile.html");</script>
+<title>호텔엔투어 박람회 (게임 적용 시안)</title>
+<!-- <link rel="shortcut icon" -->
+
+<link rel="shortcut icon" href="https://hotelntour.co.kr/image/icon/topicon.png" />
+<link href="https://new.honeymoonresort.co.kr/css/board/pcExpoMain.css" rel="stylesheet" type="text/css">
+<link href="https://new.honeymoonresort.co.kr/css/board/expo_application.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js"></script>
+<script src="https://new.honeymoonresort.co.kr/js/pcExpoMain.js"></script>
+
+<script type="text/javascript"
+	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x"></script>
+<script type="text/javascript"
+	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x&callback=initMap"></script>
+
+<!-- 아래의 코드를 <head></head> 태그 사이에 넣어주세요. -->
+<!-- Google Tag Manager -->
+
+<!-- End Google Tag Manager -->
+
 </head>
+
 <body>
 
-<!-- 1920×1080 고정 화면: 창 크기에 맞춰 통째로 확대·축소됩니다 -->
-<div class="screen" id="screen" data-design-by="정지희 과장">
-<div class="sea" id="sea" aria-hidden="true"></div>
-<div class="clim sand" aria-hidden="true"></div>
-<div class="clim bloom" aria-hidden="true"></div>
-<div class="clim green" aria-hidden="true"></div>
-<div class="clim snow" aria-hidden="true"></div>
-<div class="topbar">
-  <div class="brand">HOTEL&amp;TOUR · WINTER QUEST</div>
-  <div class="tool">
-    <button class="tbtn px" id="sfx" type="button">SOUND ON</button>
-    <button class="tbtn px" id="restart" type="button">RESTART</button>
-  </div>
+	<!-- header -->
+	<header>
+		<a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do"><img
+			src="https://hotelntour.co.kr/image/logo/logo.png" title="회사 로고" /></a>
+		<nav>
+			<ul>
+				<li class="tab-link"><a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do#tab-1,resort"
+					name="resort">휴양지</a></li>
+				<li class="tab-link"><a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do#tab-2,tourist"
+					name="tourist">관광지</a></li>
+				<li class="tab-link"><a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do#tab-3,benefits"
+					name="benefits">기타혜택</a></li>
+				<li class="tab-link"><a href="https://new.honeymoonresort.co.kr/hr/pcexpo.do#tab-4,directions"
+					name="directions">오시는길</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="main_banner" id="main_banner">
+		
+			<img
+				src="https://new.honeymoonresort.co.kr/resources/expo_upload/b6eecb56-1cfc-40f8-ad1e-eb36743d7342.jpg"
+				alt="main.jpg">
+</div>
+<!-- ===== 여기부터: 호텔엔투어 겨울방학 8비트 게임 (Design © 정지희 과장) =====
+     PC 박람회 페이지(pcexpo.do)와 모바일 박람회 페이지(expo.do) 모두 같은 코드를 넣으면 됩니다. -->
+<style>
+  /* 게임이 위 메뉴바 아래 한 화면에 꼭 맞게 들어감. --ht-top = 메뉴바 높이 */
+  #ht8bit{--ht-top:65px;scroll-margin-top:var(--ht-top);background:#fff}
+  #ht8bit iframe{display:block;margin:0 auto;border:0;aspect-ratio:16/9;width:min(100%,calc((100vh - var(--ht-top)) * 16 / 9))}
+  /* 모바일: 메뉴바 높이는 화면 폭의 1/8, 게임은 세로 화면으로 꽉 차게 */
+  @media (max-width:768px){
+    #ht8bit{--ht-top:12.5vw}
+    #ht8bit iframe{width:100%;aspect-ratio:auto;height:calc(100vh - var(--ht-top));height:calc(100svh - var(--ht-top))}
+  }
+  /* 게임이 화면에 보이는 동안만 "박람회 신청하러 가기" 버튼을 잠깐 숨김 */
+  .floating{transition:opacity .3s}
+  body.ht-playing .floating{opacity:0;pointer-events:none}
+</style>
+<div id="ht8bit">
+  <iframe src="game/index.html" title="호텔엔투어 미리 준비하는 겨울방학 게임"></iframe>
+</div>
+<script>
+  (function(){
+    var box=document.getElementById("ht8bit");
+    new IntersectionObserver(function(es){ document.body.classList.toggle("ht-playing", es[0].isIntersecting); },{threshold:.5}).observe(box);
+    addEventListener("message",function(e){
+      if(e.data==="ht-start") box.scrollIntoView({behavior:"smooth"});   // START 누르면 게임을 화면에 딱 맞춤
+      if(e.data==="ht-apply"){ var f=document.querySelector(".floating"); if(f) f.click(); }   // 결과 화면 신청 버튼 → 무료초대권 신청 창
+    });
+  })();
+</script>
+<!-- ===== 여기까지 ===== -->
+<div class="main_banner">
+		
+			<img
+				src="https://new.honeymoonresort.co.kr/resources/expo_upload/03fe6221-cdb1-4650-9f90-2b02bd370265.jpg"
+				alt="호투 박람회페이지.jpg">
+		
+	</div>
+	<div class="dev-bottom"></div>
+
+
+	<!-- 	main -->
+	<div id="wrap">
+		<div class="container">
+			<ul class="tabs">
+				<li class="tab-link current" data-tab="tab-1"
+					id="resort">휴양지</li>
+				<li class="tab-link" data-tab="tab-2"
+					id="tourist">관광지</li>
+				<li class="tab-link" data-tab="tab-3"
+					id="benefits">기타혜택</li>
+				<li class="tab-link" data-tab="tab-4"
+					id="directions">오시는길</li>
+			</ul>
+
+			<!-- 휴양지 -->
+			<div id="tab-1" class="tab-content current">
+				<div id="menu" class="content">
+
+					
+
+						
+							<ul>
+								<li><a href="#tab-10">하와이</a></li>
+							</ul>
+						
+					
+
+						
+							<ul>
+								<li><a href="#tab-11">몰디브</a></li>
+							</ul>
+						
+					
+
+						
+							<ul>
+								<li><a href="#tab-12">발리</a></li>
+							</ul>
+						
+					
+
+						
+							<ul>
+								<li><a href="#tab-13">태국</a></li>
+							</ul>
+						
+					
+
+						
+					
+
+						
+					
+				</div>
+
+				
+					
+
+						
+						<div class="main-line-title">하와이</div>
+						<div class="image-box" id="tab-10">
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(79);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/1cee9a05-a7bf-4bb1-aa63-edb6633f2379.jpg">
+										<a class="first-title">호텔엔투어의 VIP를 위한 프라이빗 하와이 여행</a> <a
+											class="sub-title">트래블 컨시어지 서비스로 완벽한 하와이 전 일정 케어</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(80);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/5354db9c-78c7-4096-9dc8-739567d9fa08.jpg">
+										<a class="first-title">하와이 가족여행 이렇게도 OK!</a> <a
+											class="sub-title">체험형 현장학습 여행부터 럭셔리 휴양까지</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(78);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/8a5edc66-bdf0-4718-8db7-1cf6341a1e2f.jpg">
+										<a class="first-title">대한민국 최저가로 만나는 하와이 인기호텔</a> <a
+											class="sub-title">비싼 유류할증료에도 호텔엔투어로 특가로 하와이 가족여행은 그대로</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+						</div>
+					
+				
+					
+
+						
+						<div class="main-line-title">몰디브</div>
+						<div class="image-box" id="tab-11">
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(61);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/a3efc236-7831-410f-b891-3e292847c24b.jpg">
+										<a class="first-title">몰디브 가족여행 추천 리조트</a> <a
+											class="sub-title">아동 1인/2인 무료 리조트</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(53);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/89a81334-cc6f-4f05-94a1-91cef1248feb.jpg">
+										<a class="first-title">포시즌스 란다기라바루</a> <a
+											class="sub-title">직거래 도매 특가</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+						</div>
+					
+				
+					
+
+						
+						<div class="main-line-title">발리</div>
+						<div class="image-box" id="tab-12">
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(60);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/7eab0013-ab9e-4fef-ab52-40f42ebdaf36.jpg">
+										<a class="first-title">호텔엔투어는 1:1 맞춤여행</a> <a
+											class="sub-title">NO패키지 / 프라이빗 차량 / 단독 가이드 / NO쇼핑</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(76);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/1c4ebe40-5fdf-4aa9-94a7-a3a695d4b4f6.jpg">
+										<a class="first-title">발리 10만 원 할인 더 </a> <a
+											class="sub-title">파라디수스/포시즌스짐바란/포시즌스사이얀/아야나/물리아</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+						</div>
+					
+				
+					
+
+						
+						<div class="main-line-title">태국</div>
+						<div class="image-box" id="tab-13">
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(83);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/7daaba7a-495c-4920-ab0f-0669b45f1d19.png">
+										<a class="first-title">코사무이 카오락 푸켓 취향대로 고르는 맞춤 휴양</a> <a
+											class="sub-title">코사무이/카오락/푸켓</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+        						
+							
+
+								
+							
+
+								
+							
+
+								
+							
+
+								
+							
+						</div>
+					
+				
+					
+				
+					
+				
+			</div>
+			
+			<div id="tab-2" class="tab-content">
+				<!--관광지 -->
+				<div id="menu" class="content">
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+							<ul>
+								<li><a href="#depth_2_4">유럽</a></li>
+							</ul>
+						
+					
+						
+					
+				</div>
+
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+					
+						
+						<div class="main-line-title">유럽</div>
+						<div class="image-box" id="depth_2_4">
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(81);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/5ad3c0fc-35d7-4dba-a09c-0a02ffd4facc.jpg">
+										<a class="first-title">1:1 맞춤 유럽 여행</a> <a
+											class="sub-title">우리 가족이 원하는대로</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+								
+							
+							
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(40);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/185be486-0aed-4a76-8f2d-bc2736561b86.jpg">
+										<a class="first-title">유럽 맞춤 자유 여행</a> <a
+											class="sub-title">일정 고민을 한 번에 해결</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+								
+							
+							
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(70);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/8b884a88-c832-432c-8d15-991edb1dc583.jpg">
+										<a class="first-title">스페인 관광, 충분히 즐겼다면?</a> <a
+											class="sub-title">이제는 휴양해야 할 시간!</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+								
+							
+							
+								
+							
+						</div>
+					
+				
+					
+				
+			</div>
+
+			<div id="tab-3" class="tab-content">
+				<!--기타혜택 -->
+				<div id="menu" class="content">
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+							<ul>
+								<li><a href="#depth_3_5">호텔엔투어</a></li>
+							</ul>
+						
+					
+				</div>
+
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+					
+							
+						<div class="main-line-title">호텔엔투어</div>
+						<div class="image-box" id="depth_3_5">
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+							
+							
+								
+									<div class="image-title"
+										onclick="fn_imgOncClick(24);" style="cursor: pointer;">
+										<img
+											src="https://new.honeymoonresort.co.kr/resources/expo_upload/8c59b759-0254-4b2a-8725-bc9e38498413.jpg">
+										<a class="first-title">혜택 더더더! 호텔엔투어로 떠나는 여행</a> <a
+											class="sub-title"> why 호텔엔투어 박람회에서 더 많은 혜택 안내 받기</a>
+									</div>
+
+
+<!-- 											<div class="center-line"></div> -->
+
+								
+							
+						</div>
+
+					
+				
+			</div>
+
+			<div id="tab-4" class="tab-content">
+				
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://new.honeymoonresort.co.kr/css/board/pcExpoMain.css" rel="stylesheet" type="text/css">
+<link href="https://new.honeymoonresort.co.kr/css/board/comon.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js"></script>
+<script src="https://new.honeymoonresort.co.kr/js/pcExpoMain.js"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x&callback=initMap"></script>
+<title>오시는 길</title>
+</head>
+<body>
+<div id="container1">
+	<div id="section4" class="target">
+    <div class="map_wrap">
+       <div class="map_title">
+          <a class="regular" style="font-size:28px; color: #333333; font-family: Pretendard regular;">호텔엔투어 박람회</a><br>
+          <a class="semibold" style="font-size: 32px; color:#333333; margin-bottom: 40px; font-family: Pretendard semibold;">오시는 길</a>
+       </div>
+       <div id="map" class="map_box"></div>
+       <div class="map_addr regular">
+          <a href="https://map.naver.com/p/search/%ED%98%B8%ED%85%94%EC%97%94%ED%88%AC%EC%96%B4/place/1813396265?c=15.00,0,0,0,dh">📍 서울시 강남구 청담동 도산대로 506 재정빌딩 2층 호텔엔투어 (청담사거리 신한은행 건물 2층)</a>
+       </div>
+       <div class="map_info">
+          <div class="subway">
+             <div class="map_logo regular"><img src="https://hotelntour.co.kr/image/logo/subway.png"><span style="margin-top:2px;">지하철 이용 시</span></div>
+             <a class="regular"><b class="semibold">7호선 청담역 9번출구</b> 도보 7분 거리</a>
+             <br/>
+              <a class="regular"><b class="semibold">수인분당선 압구정로데오역 2번출구</b> 도보 13분 거리</a>
+             <div class="mb" style="margin-top: 35px;"></div>
+                <img src="https://hotelntour.co.kr/image/expo/subway_map_pc.png" alt="지하철 오는 길">
+           </div>
+	           <div class="car">
+	              <div class="map_logo regular"><img src="https://hotelntour.co.kr/image/logo/car.png"><span style="margin-top:2px;">자가용 이용 시</span></div>
+	              <a class="bold" style="font-family:bold;">빌딩 뒷편 무료주차 가능</a>
+	              <br/>
+	              <a class="regular">(청담주차장 맞은 편)</a>
+	              <div class="mb"></div>
+	              <img src="https://hotelntour.co.kr/image/expo/parking_map.png" alt="주차구역이미지">
+	              <img src="https://hotelntour.co.kr/image/expo/parking_view.png" alt="주차구역이미지">
+	           	</div>
+        	</div>
+     	</div>
+	</div>
 </div>
 
-<main class="board" id="board">
-  <div class="wave l" aria-hidden="true"></div><div class="wave r" aria-hidden="true"></div>
-  <div class="road" aria-hidden="true"><i class="road-dirt"></i><i class="road-snow"></i></div>
-  <div class="walkers" id="walkers" aria-hidden="true">
-    <div class="walker A" id="wA"></div>
-  </div>
 
-  <section class="stage intro" id="st-draw">
-    <header class="hero">
-      <div class="plate px">
-        <p class="pre">호텔엔투어로</p>
-        <h1>미리 준비하는 <span class="a">겨울</span><span class="b">방학</span></h1>
-        <p>한 발 빠른 준비로 만나는 특가 &amp; 특별한 기간한정 상품<br>눈길을 따라 내려가며 나의 여행 취향을 골라 주세요</p>
-        <div class="trip-info" id="tripInfo"></div>
-      </div>
-    </header>
-    <div class="cols"><div class="pcol A"></div><div class="mid" data-mark></div><div class="pcol B"></div></div>
-    <div class="next"><button class="go px" id="go-draw" type="button">START ▶ 출발!</button></div>
-  </section>
 
-  <div id="stages"></div>
-</main>
-<nav class="progress px" id="progress" hidden aria-label="진행 단계"></nav>
-<div class="toast" id="toast"></div>
-</div>
+<script type="text/javascript">
+$(function() {
+	initMap();
+});
 
-<script src="game.js"></script>
+function initMap() {
+	var mapOptions = {
+		    center: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    zoom: 17,
+		};
+
+		var map = new naver.maps.Map('map', mapOptions); // 'map'은 HTML 요소의 id
+
+		var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    zoom: 17
+		});
+
+		var contentString = [
+		    '<div class="customoverlay" style="width:110px">',
+		    '   <h4>호텔엔투어</h4>',
+		    '</div>'
+		].join('');
+
+		var marker = new naver.maps.Marker({
+		    position: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    map: map
+		});
+
+		var infowindow = new naver.maps.InfoWindow({
+
+		    content: contentString,
+		    borderWidth: 0,
+		    disableAnchor: true,
+		    backgroundColor: 'transparent',
+
+		    pixelOffset: new naver.maps.Point(20, -21)
+		});
+
+		infowindow.open(map, marker);
+}
+</script>
 </body>
+
+</html>
+
+			</div>
+
+		</div>
+
+
+		<div class="footer_new">
+			<div class="fix_form">
+				<div class="arrow_wrap">
+					<div class="top arrow_btn" onclick="scrollUp()">
+						<img src="https://hotelntour.co.kr/image/icon/top.png">
+					</div>
+					<div class="bottom arrow_btn" onclick="scrollDown()">
+						<img src="https://hotelntour.co.kr/image/icon/bottom.png">
+					</div>
+				</div>
+				<a href="javascript:;" class="floating"><img
+					src="https://hotelntour.co.kr/image/expo/application_btn.png" /></a>
+			</div>
+
+			<div id="new-modal" class="modal-background" style="display: none;">
+				<div class="modal-content">
+					<a class="modal-close" href="javascript:;"><i
+						class="bi bi-x-lg"></i></a><br>
+					<div class="honey-font">호텔엔투어 박람회</div>
+					<div class="free-invite">
+						<img src="https://hotelntour.co.kr/image/expo/free_invite.png">
+					</div>
+					<form id="free-invite">
+						<div class="invite-line"></div>
+						<div class="name-input">
+							<label>이 름*</label><input type="text" class="userName"
+								name="userName" placeholder="이름을 입력해주세요." />
+						</div>
+						<div class="invite-line"></div>
+						<div class="name-input">
+							<label>연 락 처*</label><input type="text" class="phoneNumber"
+								oninput="oninputPhone(this)" maxlength="13" name="phoneNumber"
+								placeholder="'-'없이 입력해주세요." />
+						</div>
+						<div class="invite-line"></div>
+						<div class="name-input">
+							<label>출발예정일*</label><input type="date" class="weddingDate"
+								name="weddingDate" placeholder="출발예정일을 선택해주세요." />
+						</div>
+						<div class="invite-line"></div>
+						<div class="name-input">
+							<label>방 문 일*</label><select class="visitDate appSelect"
+								name="visitDate"><option value="0">방문일을 선택해주세요</option>
+								
+									<option value="2026-10-31">2026-10-31</option>
+								
+									<option value="2026-11-01">2026-11-01</option>
+								
+							</select>
+						</div>
+						<div class="invite-line"></div>
+						<div class="name-input">
+							<label>장 소</label><select class="location appSelect"
+								name="location">
+								
+									<option value="호텔엔투어 서울 본사">호텔엔투어 서울 본사</option>
+								
+							</select>
+						</div>
+						<div class="invite-line"></div>
+						<div class="collection">
+							<label>개인정보 수집 및 이용에 동의합니다.</label> <input type="checkbox"
+								id="agree" name="agree" />
+						</div>
+						<div class="free-input" type="text">
+							<p>
+								1. 수집하는 개인정보 항목 <br> 이용자는 무료초대권 신청하기 또는 상담신청을 하지 않아도 정보 검색,
+								컨텐츠 보기 등 대부분 사이트의 서비스를 이용할 수 있습니다. 이용자가 무료초대권 신청하기 또는 상담신청을 할 경우
+								서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다. <br> 회사가 무료초대권 신청하기 또는
+								상담신청시 이용자로부터 수집하는 개인정보는 아래와 같습니다. <br> - 성명, 휴대폰번호, 방문일자 <br>※
+								쿠키 관련 내용은 수집하지 않습니다. <br>회사는 아래의 방법을 통해 개인정보를 수집합니다. <br>
+								사이트에서 서비스 이용 과정에서 이용자가 개인정보 수집에 대해 동의를 하고 직접 정보를 입력하는 경우, 해당
+								개인정보를 수집합니다. <br> 오프라인에서 진행되는 박람회, 박람회 등에서 서면을 통해 개인정보가 수집될
+								수 있습니다. <br> <br>2. 수집한 개인정보의 이용목적 <br> 회사는 아래의
+								목적으로만 개인정보를 이용합니다. <br>- 허니문박람회 행사 참가 무료초대권 및 입장권 발급을 위해
+								개인정보를 확인하고 있습니다. <br> - 서비스 이용기록과 통계에 따른 맞춤 서비스 제공 등에 개인정보를
+								이용합니다. <br> <br>3. 수집한 개인정보의 보유 및 이용기간 <br> 회사는
+								법령에 따라 개인정보를 보관하고 기간이 지나면 파기합니다. <br> 전자상거래 등에서의 소비자 보호에 관한
+								법률, 전자금융거래법, 통신비밀보호법 등 법령에서 일정기간 정보의 보관을 규정하는 경우는 다음과 같습니다. <br>
+								- 전자상거래 등에서 소비자 보호에 관한 법률 <br>계약 또는 청약철회 등에 관한 기록 : 5년 보관 <br>대금결제
+								및 재화 등에 공급에 관한 기록 : 5년 보관 <br> 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년
+								보관 <br>- 전자금융거래법 <br>전자금융에 관한 기록 : 5년 보관 <br>-
+								통신비밀보호법 <br>박람회참가 및 문의 신청기록 : 1년 <br> 이용자에게 동의 받은 개인정보
+								보유기간의 도래와 같이 개인정보의 수집 및 이용목적이 달성된 개인정보는 재생이 불가능한 방법으로 파기하고 있습니다.
+								<br> 법령에서 보존의무를 부과한 정보에 대해서도 해당 기간 경과 후 지체 없이 재생이 불가능한 방법으로
+								파기합니다. <br> 전자적 파일 형태의 경우 복구 및 재생이 되지 않도록 기술적인 방법을 이용하여
+								안전하게 삭제하며, 출력물 등은 분쇄하거나 소각하는 방식 등으로 파기합니다. <br> 고객의 삭제요청 후
+								5일 까지 보유
+							</p>
+						</div>
+						<a class="button btnFade btnBlueGreen" type="button"
+							onclick="invite()">신청하기</a>
+					</form>
+
+					<div id="invite-modal" class="invite-modalimg">
+						<div class="maodl-content">
+							<span class="alert_close" onclick="location.reload();">X</span> <img
+								src="https://hotelntour.co.kr/image/expo/complete.png"
+								id="modalImage" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer id="new_footer">
+		<div class="f_top">
+			<div class="inner">
+				<ul class="f_link">
+					<li><a href="https://www.hotelntour.co.kr/company/company.do">회사소개</a>
+					</li>
+					<li><a href="https://www.hotelntour.co.kr/company/history.do">회사연혁</a>
+					</li>
+					<li><a href="https://www.hotelntour.co.kr/company/location.do">찾아오시는
+							길</a></li>
+					<li><a
+						href="https://www.hotelntour.co.kr/company/terms_travel.do">여행약관</a>
+					</li>
+					<li><a
+						href="https://www.hotelntour.co.kr/company/terms_use.do">이용약관</a>
+					</li>
+					<li><a
+						href="https://www.hotelntour.co.kr/company/terms_personal.do">개인정보처리방침</a>
+					</li>
+				</ul>
+				<ul class="f_sns">
+					<li class="ico01"><a href="https://pf.kakao.com/_xkxonJb"><div
+								class="image-kakao"></div></a></li>
+					<li class="ico01"><a
+						href="https://www.instagram.com/hotelntour/"><div
+								class="image-instargram"></div></a></li>
+					<li class="ico01"><a
+						href="https://www.youtube.com/channel/UCJWVy7OibcGP2dsni2t8_qw"><div
+								class="image-youtube"></div></a></li>
+					<li class="ico01"><a
+						href="https://ko-kr.facebook.com/hotelntour"><div
+								class="image-facebook"></div></a></li>
+					<li class="ico01"><a href="https://blog.naver.com/hotel-tour"><div
+								class="image-blog"></div></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="f_bottom">
+			<div class="inner">
+				<address>
+					(06070) 서울시 강남구 도산대로 506, 2층(청담동, 재정빌딩) (주)호텔엔투어 <br /> 고객센터 :
+					02.6259.6000 | 팩스 : 02.6007.1532 | 사업자 등록번호 : 762-88-00877 <br />
+					대표 : 유태선 | 통신신고번호 : 2018-서울강남-01061
+				</address>
+				<div class="f_logo">
+					<a href="https://www.hotelntour.co.kr/"> <img
+						src="https://hotelntour.co.kr/image/expo/logo.png"
+						style="margin-right: 50px; margin-bottom: 15px; width: 220px;"></a>
+					<div class="f_button">
+						<div id="admin" style="margin-right: 10px;">
+							<a href="https://new.honeymoonresort.co.kr/Admin/login.do">ADMIN</a>
+						</div>
+						<div id="mobile" style="margin-right: 50px;">
+							<a href="https://new.honeymoonresort.co.kr/hr/expo.do">모바일화면보기</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div></div>
+	<!-- 아래의 코드를 <body> 여는 태그 다음에 넣어주세요. -->
+<!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->
+
+<style>
+  #pv-badge{position:fixed;left:10px;bottom:10px;z-index:99999;background:rgba(42,28,18,.85);color:#fff;font:600 12px/1.4 sans-serif;padding:6px 10px;border-radius:6px}
+  #pv-badge a{color:#ffd23c}
+  #free-invite input,#free-invite select{pointer-events:none;opacity:.5}
+</style>
+<div id="pv-badge">시안 미리보기 · 실제 신청 불가 · <a href="mobile.html?pc">모바일 시안 보기</a></div>
+<script>
+  (function(){
+    function block(){
+      window.invite=function(){ alert("시안 미리보기 페이지입니다.\n실제 신청은 호텔엔투어 공식 박람회 페이지에서 해 주세요."); };
+      document.querySelectorAll("#free-invite input, #free-invite select").forEach(function(el){ el.disabled=true; });
+    }
+    block(); addEventListener("DOMContentLoaded",block); addEventListener("load",block);
+  })();
+</script>
+</body>
+
 </html>

@@ -1,0 +1,2358 @@
+
+
+
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache"/> 
+<meta http-equiv="Expires" content="0"/> 
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta property="og:image" content="https://hotelntour.co.kr/image/icon/link_image.png">
+<link rel="apple-touch-icon-precomposed" href="https://hotelntour.co.kr/image/icon/topicon.png" />
+<meta name="robots" content="noindex,nofollow">
+<title>호텔엔투어 박람회 (게임 적용 시안)</title>
+
+<link rel="shortcut icon" href="https://hotelntour.co.kr/image/icon/topicon.png" />
+<link href="https://new.honeymoonresort.co.kr/css/board/expo.css" rel="stylesheet" type="text/css">
+<link href="https://new.honeymoonresort.co.kr/css/board/expo_application.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js"></script>
+<script src="https://new.honeymoonresort.co.kr/js/expo.js"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oez2jtfm7x&callback=initMap"></script>
+
+<!-- 아래의 코드를 <head></head> 태그 사이에 넣어주세요. -->
+<!-- Google Tag Manager -->
+
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+<script type="text/javascript">
+/*
+if (document.location.protocol == 'http:') {
+    document.location.href = document.location.href.replace('http:', 'https:');
+}
+*/
+
+
+let Device = "";
+//기기 인식
+$(document).ready(function() {
+    // href 동적으로 변경
+    var infoLink = document.getElementById('infoLink');
+    var termsUseLink = document.getElementById('termsUseLink');
+    var termsPersonalLink = document.getElementById('termsPersonalLink');
+    var insuranceLink = document.getElementById('insuranceLink');
+    var agree = document.getElementsByClassName('agree')[0];
+   	let sideBarNew = document.getElementsByClassName('modal_background_new')[0];
+    
+	//pc 디바이스 종류
+	var pcDevice = "win16|win32|win64|mac|macintel";
+		if(navigator.platform){
+			//pc 아닐 경우
+			if(pcDevice.indexOf(navigator.platform.toLowerCase()) < 0){
+				Device = "M";
+		    //pc인 경우
+			}else{
+				sideBarNew.style.display = "flex";
+		        infoLink.href = 'https://www.hotelntour.co.kr/m/company_info.do';
+		        termsUseLink.href = 'https://www.hotelntour.co.kr/m/company_agreement.do';
+		        termsPersonalLink.href = 'https://www.hotelntour.co.kr/m/company_personal.do';
+		        insuranceLink.href = 'https://www.hotelntour.co.kr/m/company_personal.do';
+				Device = "P";
+			}
+	  }
+		
+		
+});
+
+	
+   $(function(){
+	   
+  	   /* 중분류 네비게이션 */
+	   // 서브 네비 메뉴
+		$.ajax({
+		    url: "/board/getExpoMenu.do",
+		    type: "post",
+		    success: function(response) {
+		        console.log(response);
+		
+		        let vacay_menu_append = "";
+		        let tour_menu_append = "";
+		        let benefit_menu_append = "";
+		
+		        for (let i = 1; i <= 3; i++) {
+		            let depth2ListForDepth1 = response.depth2_list.filter(function(depth2) {
+		                return depth2.DEPTH1_IDX === i;
+		            });
+		
+		            for (let j = 0; j < depth2ListForDepth1.length; j++) {
+		                const menu = depth2ListForDepth1[j];
+		                const menuHtml = '<li><a href="javascript:void(0)" class="region_tap" depth1idx="' + menu.DEPTH1_IDX + '" depth2idx="' + menu.DEPTH2_IDX + '">' + menu.DEPTH2_NAME + '</a></li>';
+		                if (menu.DEPTH1_IDX === 1) {
+		                    vacay_menu_append += menuHtml;
+		                } else if (menu.DEPTH1_IDX === 2) {
+		                    tour_menu_append += menuHtml;
+		                } else if (menu.DEPTH1_IDX === 3) {
+		                    benefit_menu_append += menuHtml;
+		                }
+		            }
+		
+		            if (depth2ListForDepth1.length > 0) {
+		                const depth1Idx = depth2ListForDepth1[0].DEPTH1_IDX;
+
+			            $(".vacay_menu").append(depth1Idx === 1 ? vacay_menu_append : '');
+			            $(".tour_menu").append(depth1Idx === 2 ? tour_menu_append : '');
+			            $(".benefit_menu").append(depth1Idx === 3 ? benefit_menu_append : '');
+		            }
+		        }
+		
+		        $(".region_menu li:first-child a").addClass("region_clicked");
+		    },
+		    error: function(ErrorMsg) {
+		        console.log(ErrorMsg);
+		    }
+		});
+
+       //서브 네비 드롭다운 메뉴
+		$.ajax({
+		    url: "/board/getExpoMenu.do",
+		    type: "post",
+		    success: function(response) {
+		        let vacay_menu_append = "";
+		        let tour_menu_append = "";
+		        let benefit_menu_append = "";
+		
+		        for (let i = 1; i <= 3; i++) {
+		            let depth2ListForDepth1 = response.depth2_list.filter(function(depth2) {
+		                return depth2.DEPTH1_IDX === i;
+		            });
+		
+		            let current_menu_append = '<ul class="column">';
+		
+		            for (let j = 0; j < depth2ListForDepth1.length; j++) {
+		                const menu = depth2ListForDepth1[j];
+		
+		                if ((j + 1) % 2 === 0) {
+		                    current_menu_append += '<li><a href="javascript:void(0)" class="slide_tap slide_margin_l" depth1idx="' + menu.DEPTH1_IDX + '" depth2idx="' + menu.DEPTH2_IDX + '">' + menu.DEPTH2_NAME + '</a></li>';
+		                } else {
+		                    current_menu_append += '<li><a href="javascript:void(0)" class="slide_tap slide_margin_r" depth1idx="' + menu.DEPTH1_IDX + '" depth2idx="' + menu.DEPTH2_IDX + '">' + menu.DEPTH2_NAME + '</a></li>';
+		                }
+		
+		                if ((j + 1) % 2 === 0 || (j + 1) === depth2ListForDepth1.length) {
+		                    if ((j + 1) === depth2ListForDepth1.length) {
+		                        // 마지막 항목이 홀수인 경우 추가 요소를 넣어줌
+		                        if (depth2ListForDepth1.length % 2 !== 0) {
+		                            current_menu_append += '<li><a href="javascript:void(0)" class="slide_tap_w slide_margin_l">' + menu.DEPTH2_NAME + '</a></li>';
+		                        }
+		                    }
+		                    current_menu_append += '</ul>';
+		
+		                    if ((j + 1) !== depth2ListForDepth1.length) { // 마지막 항목일 경우 다음 <ul> 추가하지 않음
+		                        current_menu_append += '<ul class="column">';
+		                    }
+		                }
+		            }
+		            
+		            $(".vacay_slide_menu").append(i === 1 ? current_menu_append : '');
+		            $(".tour_slide_menu").append(i === 2 ? current_menu_append : '');
+		            $(".benefit_slide_menu").append(i === 3 ? current_menu_append : '');
+		        }
+		        
+		        $(".slide_menu ul:first-child li:first-child a").addClass("slide_clicked");
+		    },
+		    error: function(ErrorMsg) {
+		        console.log(ErrorMsg);
+		    }
+		});
+
+       
+       /* 컨텐츠 이미지 가져오기 */
+		$.ajax({ 
+		    url: "/board/getContentsAll.do",
+		    type: "POST",
+		    success: function(response) {
+		        for (let item of response.mainImg) {
+		            var main_append = '<img src="https://new.honeymoonresort.co.kr/resources/expo_upload/' + item.IMAGE_NEW + '" alt="' + item.IMAGE_NEW + '" depth1idx="' + item.DEPTH1_IDX + '" depth2idx="' + item.DEPTH2_IDX + '">';
+		            $(".vacay_image").append(item.DEPTH1_IDX === 1 ? main_append : '');
+		            $(".tour_image").append(item.DEPTH1_IDX === 2 ? main_append : '');
+		            $(".benefit_image").append(item.DEPTH1_IDX === 3 ? main_append : '');
+		        }
+		    }
+		});
+
+
+   }) //$(function(){}) END
+   
+
+</script>
+
+
+
+  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+</head>
+<style>
+
+</style>
+<script>
+//기기 인식
+$(document).ready(function() {
+	
+    var homeLink = document.getElementById('honeyHomeNew');
+    
+	//pc 디바이스 종류
+	var pcDevice = "win16|win32|win64|mac|macintel";
+		if(navigator.platform){
+			//pc 아닐 경우
+			if(pcDevice.indexOf(navigator.platform.toLowerCase()) < 0){
+				homeLink.setAttribute("onClick", "window.location.href='https://www.hotelntour.co.kr/m/index.do'");
+		    //pc인 경우
+			}else{
+				homeLink.setAttribute("onClick", "window.location.href='https://www.hotelntour.co.kr/m/index.do'");
+			}
+	  }
+
+});
+
+	$(function(){
+		$(".sub-menu").hide();
+	})
+	
+	function cancleNew(){
+		$(".modal_background_new").css("display", "none");
+		console.log("cancleNew");
+	}
+	
+	$(document).on('click', ".menu-item-new", function() { // 서브메뉴토글
+		if($(this).next().hasClass("last-ttl")){ // 마지막 메뉴이면
+	      $(this).next().toggle(); // last-ttl도 함께 토글
+	      $(this).next().next().toggle();
+		}else{
+	      $(this).next().next().toggle();
+		}
+		console.log("menu-item-new");
+	  });
+	
+
+</script>
+<body>
+	<div class="modal_background_new" style="display: none;">
+		<div class="modal_wrap_new">
+			<div class="side_modal">
+				<div class="button_container">
+					<button class="cancle" onclick="cancleNew()"><img src="https://hotelntour.co.kr/image/expo/cancel.png"></button>
+				</div>
+				<div class="inner_container">
+					
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+							<div id="honeyHomeNew" class="honey b bl">
+							<span style="padding-top: 0;"><i class="bi bi-house-door-fill" value="6"></i> 호텔엔투어 홈페이지</span></div>
+				        
+				    
+				        
+				    
+					
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+							<div class="expo b bl" onclick="window.location.href='http://new.honeymoonresort.co.kr/hr/expo.do'">
+							<span value="7">맞춤여행 박람회 메인 페이지💖</span></div>
+				        
+				    
+					<div class="in_inner">
+					    
+					        
+					            <div class="depth_list benefit p" id="no1">
+					                <span class="ebold tl" value="1">휴양지🌴</span>
+					                
+					                
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">하와이
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                    3
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="a0993a97-2b6e-44a1-a73d-6f9931309fa0.jpg">호텔엔투어의 VIP를 위한 프라이빗 하와이 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="5d39768b-269f-43e3-aeda-cd76df5d1b17.jpg">하와이 가족여행 이렇게도 OK!</li>
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="d4548872-be57-4f21-b1c2-160b666ce991.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">몰디브
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    2
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="c2bf4bfa-0dbb-4367-a0c4-88464438b00a.jpg">몰디브 가족여행 추천 리조트</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="18818720-a000-4aa2-8403-00d49b804ade.jpg">포시즌스 란다기라바루</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">발리
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    2
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="8bde941c-90b0-4f99-9f33-595f2c52ced5.jpg">호텔엔투어는 1:1 맞춤여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="6affb3de-c322-4034-86b4-d1c02485dd71.jpg">발리 10만 원 할인 더 </li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">태국
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    1
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="57c45e43-8953-4f88-a316-5ed45cc49ec9.png">코사무이 카오락 푸켓 취향대로 고르는 맞춤 휴양</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					            <div class="depth_list benefit p" id="no2">
+					                <span class="ebold tl" value="2">관광지🎡</span>
+					                
+					                
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">유럽
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    3
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="8e97c4df-2364-4056-9b7e-2502359740da.jpg">1:1 맞춤 유럽 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="007b68ca-8de4-4962-809d-d3eb8eda88fb.jpg">유럽 맞춤 자유 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="9a459037-f5df-4023-8dfc-099eb3482c04.jpg">스페인 관광, 충분히 즐겼다면?</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					            <div class="depth_list benefit p" id="no3">
+					                <span class="ebold tl" value="3">기타 혜택🎁</span>
+					                
+					                
+					                
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item-new">호텔엔투어
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    1
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="0deab9d0-5924-4e14-bae2-aaf83fd8e3e7.jpg">혜택 더더더! 호텔엔투어로 떠나는 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					    
+					        
+					    
+					        
+					    
+					    <div class="guidance"><span class="ebold bl">
+					        
+					            
+					        
+					            
+					        
+					            
+					        
+					            
+					                <a onclick="cancle(); move_section(4)" value="4">오시는 길📍</a>
+					            
+					        
+					            
+					        
+					            
+					        
+					    </span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+</head>
+<style>
+
+</style>
+<script>
+//기기 인식
+$(document).ready(function() {
+	
+    var homeLink = document.getElementById('honeyHome');
+    
+	//pc 디바이스 종류
+	var pcDevice = "win16|win32|win64|mac|macintel";
+		if(navigator.platform){
+			//pc 아닐 경우
+			if(pcDevice.indexOf(navigator.platform.toLowerCase()) < 0){
+		    //pc인 경우
+			}else{
+				homeLink.setAttribute("onClick", "window.location.href='https://www.hotelntour.co.kr/index.do'");
+			}
+	  }
+
+});
+
+	$(function(){
+		$(".sub-menu").hide();
+	})
+	
+	function cancle(){
+		$(".modal_background").css("display", "none");
+	}
+	
+	$(document).on('click', ".menu-item", function() { // 서브메뉴토글
+		if($(this).next().hasClass("last-ttl")){ // 마지막 메뉴이면
+	      $(this).next().toggle(); // last-ttl도 함께 토글
+	      $(this).next().next().toggle();
+		}else{
+	      $(this).next().next().toggle();
+		}
+	console.log("menu-item");
+	  });
+	
+
+</script>
+<body>
+	<div class="modal_background">
+		<div class="modal_wrap">
+			<div class="side_modal">
+				<div class="button_container">
+					<button class="cancle" onclick="cancle()"><img src="https://hotelntour.co.kr/image/expo/cancel.png"></button>
+				</div>
+				<div class="inner_container">
+					
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+							<div id="honeyHome" class="honey b bl" onclick="window.location.href='https://www.hotelntour.co.kr/m/index.do'">
+							<span style="padding-top: 0;"><i class="bi bi-house-door-fill" value="6"></i> 호텔엔투어 홈페이지</span></div>
+				        
+				    
+				        
+				    
+					
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+				    
+				        
+							<div class="expo b bl" onclick="window.location.href='http://new.honeymoonresort.co.kr/hr/expo.do'">
+							<span value="7">맞춤여행 박람회 메인 페이지💖</span></div>
+				        
+				    
+					<div class="in_inner">
+					    
+					        
+					            <div class="depth_list benefit p" id="no1">
+					                <span class="ebold tl" value="1">휴양지🌴</span>
+					                
+					                
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">하와이
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                    3
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="a0993a97-2b6e-44a1-a73d-6f9931309fa0.jpg">호텔엔투어의 VIP를 위한 프라이빗 하와이 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="5d39768b-269f-43e3-aeda-cd76df5d1b17.jpg">하와이 가족여행 이렇게도 OK!</li>
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="d4548872-be57-4f21-b1c2-160b666ce991.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">몰디브
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    2
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="c2bf4bfa-0dbb-4367-a0c4-88464438b00a.jpg">몰디브 가족여행 추천 리조트</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="18818720-a000-4aa2-8403-00d49b804ade.jpg">포시즌스 란다기라바루</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">발리
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    2
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                
+					                                    <div class="ttl"></div>
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="8bde941c-90b0-4f99-9f33-595f2c52ced5.jpg">호텔엔투어는 1:1 맞춤여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="6affb3de-c322-4034-86b4-d1c02485dd71.jpg">발리 10만 원 할인 더 </li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">태국
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    1
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="57c45e43-8953-4f88-a316-5ed45cc49ec9.png">코사무이 카오락 푸켓 취향대로 고르는 맞춤 휴양</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					            <div class="depth_list benefit p" id="no2">
+					                <span class="ebold tl" value="2">관광지🎡</span>
+					                
+					                
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">유럽
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    3
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="8e97c4df-2364-4056-9b7e-2502359740da.jpg">1:1 맞춤 유럽 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="007b68ca-8de4-4962-809d-d3eb8eda88fb.jpg">유럽 맞춤 자유 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="9a459037-f5df-4023-8dfc-099eb3482c04.jpg">스페인 관광, 충분히 즐겼다면?</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					            <div class="depth_list benefit p" id="no3">
+					                <span class="ebold tl" value="3">기타 혜택🎁</span>
+					                
+					                
+					                
+					                    
+					                
+					                    
+					                        
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                
+					                    
+					                
+					                    
+					                        
+					                        <ul>
+					                            <li class="menu-item">호텔엔투어
+					                                <span class="count">
+					                                    
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                            
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                        
+					                                    
+					                                    1
+					                                </span>
+					                            </li>
+					
+					
+					                            <!-- 마지막 메뉴 아이템일 때만 .ttl 숨김 처리 23 -->
+					                            
+					                                
+					                                    <div class="ttl last-ttl" style="display:none;"></div>
+					                                
+					                                
+					                            
+					                            <ul class="sub-menu">
+						                    	    
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                                    <li class="subMenuLi" depth3="0deab9d0-5924-4e14-bae2-aaf83fd8e3e7.jpg">혜택 더더더! 호텔엔투어로 떠나는 여행</li>
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+						                                
+						                            
+					                            </ul>
+					                        </ul>
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					                    
+					                
+					            </div>
+					            <div class="bl"></div>
+					        
+					    
+					        
+					    
+					        
+					    
+					        
+					    
+					    <div class="guidance"><span class="ebold bl">
+					        
+					            
+					        
+					            
+					        
+					            
+					        
+					            
+					                <a onclick="cancle(); move_section(4)" value="4">오시는 길📍</a>
+					            
+					        
+					            
+					        
+					            
+					        
+					    </span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- <a href="http://1.201.161.24:14741/hr/expo.do"><img src="https://new.honeymoonresort.co.kr/image/banner/banner_mobile.png"></a> -->
+<div id="wrap">
+   <nav class="header_bar" style="position: sticky; top: 0; z-index: 100;">
+     <div class="header_container">
+       <a class="top_left" onclick="showSideBar()"><i class="bi bi-list" style="color:#000000"></i></a>
+      <a class="top_title" href="https://new.honeymoonresort.co.kr/hr/expo.do"><img src="https://hotelntour.co.kr/image/logo/logo.png" style=" width: 50%; aspect-ratio: 250 / 40;"></a>
+     </div>
+   </nav>
+
+    <div id="container">
+      <div class="main">
+         <div class="main_banner" id="main_banner">
+            
+		        <img src="https://new.honeymoonresort.co.kr/resources/expo_upload/4a6b5d15-fa99-4b23-9b47-2f230450e943.jpg" alt="main.jpg">
+</div>
+<!-- ===== 여기부터: 호텔엔투어 겨울방학 8비트 게임 (Design © 정지희 과장) =====
+     PC 박람회 페이지(pcexpo.do)와 모바일 박람회 페이지(expo.do) 모두 같은 코드를 넣으면 됩니다. -->
+<style>
+  /* 게임이 위 메뉴바 아래 한 화면에 꼭 맞게 들어감. --ht-top = 메뉴바 높이 */
+  #ht8bit{--ht-top:65px;scroll-margin-top:var(--ht-top);background:#fff}
+  #ht8bit iframe{display:block;margin:0 auto;border:0;aspect-ratio:16/9;width:min(100%,calc((100vh - var(--ht-top)) * 16 / 9))}
+  /* 모바일: 메뉴바 높이는 화면 폭의 1/8, 게임은 세로 화면으로 꽉 차게 */
+  @media (max-width:768px){
+    #ht8bit{--ht-top:12.5vw}
+    #ht8bit iframe{width:100%;aspect-ratio:auto;height:calc(100vh - var(--ht-top));height:calc(100svh - var(--ht-top))}
+  }
+  /* 게임이 화면에 보이는 동안만 "박람회 신청하러 가기" 버튼을 잠깐 숨김 */
+  .floating{transition:opacity .3s}
+  body.ht-playing .floating{opacity:0;pointer-events:none}
+</style>
+<div id="ht8bit">
+  <iframe src="game/index.html" title="호텔엔투어 미리 준비하는 겨울방학 게임"></iframe>
+</div>
+<script>
+  (function(){
+    var box=document.getElementById("ht8bit");
+    new IntersectionObserver(function(es){ document.body.classList.toggle("ht-playing", es[0].isIntersecting); },{threshold:.5}).observe(box);
+    addEventListener("message",function(e){
+      if(e.data==="ht-start") box.scrollIntoView({behavior:"smooth"});   // START 누르면 게임을 화면에 딱 맞춤
+      if(e.data==="ht-apply"){ var f=document.querySelector(".floating"); if(f) f.click(); }   // 결과 화면 신청 버튼 → 무료초대권 신청 창
+    });
+  })();
+</script>
+<!-- ===== 여기까지 ===== -->
+<div class="main_banner">
+		    
+		        <img src="https://new.honeymoonresort.co.kr/resources/expo_upload/ac9751ac-8675-4dc1-a26d-66ec36b744b7.jpg" alt="호투 박람회페이지.jpg">
+		    
+         </div>
+      </div>
+        <div class="main_nav">
+            <div class="nav-inner sidemenu">
+               <ul class="nav-container sidemenu_ul">
+                   <li class="nav-item sidemenu_li" style="border-right: 1px solid #FCF5EF;" id="vacay">
+                      <a href="javascript:void(0);" onclick= "move_section(1);">휴양지</a>
+                      <img src="https://hotelntour.co.kr/image/expo/tab.png">
+                   </li>
+                   <li class="nav-item sidemenu_li" style="border-right: 1px solid #FCF5EF;" id="tour">
+                      <a href="javascript:void(0);" onclick="move_section(2);">관광지</a>
+                   </li>
+                   <li class="nav-item sidemenu_li" style="border-right: 1px solid #FCF5EF;" id="benefit">
+                      <a href="javascript:void(0);" onclick="move_section(3);">기타혜택</a>
+                   </li>
+                   <li class="nav-item sidemenu_li" id="guidance">
+                      <a href="javascript:void(0);" onclick="move_section(4);">오시는 길</a>
+                   </li>
+               </ul>
+            </div>
+            <div class="region_wrap">
+               <div class="region_navi">
+                  <div class="region-nav-inner">
+                  	 <div class="nav-inner-wrap vacay_menu_wrap">
+                  	 	<div class="frame1 ul-frame">
+		                     <ul class="region_menu nav-container vacay_menu">
+		         
+		                     </ul>
+                     	</div>
+	                    <div class="caret-btn"><i class="bi bi-caret-up-square"></i></div>
+                     </div>
+                     <div class="nav-line vacay-line"></div>
+	                 <div class="slide_wrap" style="display: none;">
+	                     <div class="slide_menu vacay_slide_menu">
+	                     
+	                     </div>
+	                 </div>
+                  	 <div class="nav-inner-wrap tour_menu_wrap" style="display: none;">
+                     	<div class="frame2 ul-frame">
+		                     <ul class="region_menu nav-container tour_menu">
+		         
+		                     </ul>
+                     	</div>
+	                    <div class="caret-btn"><i class="bi bi-caret-up-square"></i></div>
+                     </div>
+    	             <div class="nav-line tour-line" style="display: none;"></div>
+	                 <div class="slide_wrap" style="display: none;">
+	                     <div class="slide_menu tour_slide_menu">
+	                     
+	                     </div>
+	                 </div>
+                  	 <div class="nav-inner-wrap benefit_menu_wrap" style="display: none;">
+                     	<div class="frame3 ul-frame">
+		                     <ul class="region_menu nav-container benefit_menu">
+		         
+		                     </ul>
+                     	</div>
+	                    <div class="caret-btn"><i class="bi bi-caret-up-square"></i></div>
+                     </div>
+	              	 <div class="nav-line benefit-line" style="display: none;"></div>
+	                 <div class="slide_wrap" style="display: none;">
+	                     <div class="slide_menu benefit_slide_menu">
+	                     
+	                     </div>
+	                 </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+        <div class="contents">
+         <!-- 휴양지 -->
+         <div id="section1" class="target">
+            <div class="vacay_image">
+               
+            </div>
+         </div>
+         <!-- 관광지 -->
+         <div id="section2" class="target">
+            <div class="tour_image">
+            
+            </div>
+         </div>
+         <!-- 기타혜택 -->
+         <div id="section3" class="target">
+            <div class="benefit_image">
+            
+            </div>
+         </div>
+         <!-- Naver Map -->
+         <div id="section4" class="target">
+            <div class="map_wrap">
+               <div class="map_title">
+                  <a class="regular">호텔엔투어 박람회</a><br>
+                  <a class="bold">오시는 길</a>
+               </div>
+               <div id="map" class="map_box"></div>
+               <div class="map_addr regular">
+                  <a href="https://map.naver.com/p/search/%ED%98%B8%ED%85%94%EC%97%94%ED%88%AC%EC%96%B4/place/1813396265?c=15.00,0,0,0,dh">📍 서울시 강남구 청담동 도산대로 506 재정빌딩 2층 호텔엔투어 <br>&nbsp;&nbsp;&nbsp;&nbsp;(청담사거리 신한은행 건물 2층)</a>
+               </div>
+               <div class="map_info">
+                  <div class="subway">
+                     <div class="map_logo regular"><img src="https://hotelntour.co.kr/image/logo/subway.png">지하철 이용 시</div>
+                     <a class="regular"><b>7호선 청담역 9번출구</b> 도보 7분 거리</a>
+                     <br />
+                      <a class="regular"><b>수인분당선 압구정로데오역 2번출구</b> 도보 13분 거리</a>
+                     	<img src="https://hotelntour.co.kr/image/expo/subway_map_mobile.png" alt="지하철 오는 길">
+                     <div class="mb"></div>
+                  </div>
+                  <div class="car">
+                     <div class="map_logo regular"><img src="https://hotelntour.co.kr/image/logo/car.png">자가용 이용 시</div>
+                     <a class="bold">빌딩 뒷편 무료주차 가능</a>
+                     <div class="mb"></div>
+                     <a class="regular">(청담주차장 맞은 편)</a>
+                     <img src="https://hotelntour.co.kr/image/expo/parking_map.png" alt="주차구역이미지">
+                     <img src="https://hotelntour.co.kr/image/expo/parking_view.png" alt="주차구역이미지">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- contents -->
+      <div class="footer_new">
+         <div class="f_txt">
+            <ul class="f_link">
+               <li><a href="https://pf.kakao.com/_xkxonJb"><img src="https://hotelntour.co.kr/image/icon/icon_kakao.png"></a></li>
+               <li><a href="https://www.instagram.com/hotelntour/"><img src="https://hotelntour.co.kr/image/icon/icon_instagram.png"></a></li>
+               <li><a href="https://www.youtube.com/channel/UCJWVy7OibcGP2dsni2t8_qw"><img src="https://hotelntour.co.kr/image/icon/icon_youtube.png"></a></li>
+               <li><a href="https://ko-kr.facebook.com/hotelntour"><img src="https://hotelntour.co.kr/image/icon/icon_facebook.png"></a></li>
+               <li><a href="https://blog.naver.com/hotel-tour"><img src="https://hotelntour.co.kr/image/icon/icon_blog.png"></a></li>
+            </ul>
+			<ul class="agree">
+			    <li><a href="https://hotelntour.co.kr/m/company_info.do" id="infoLink">회사소개&nbsp;&nbsp;|&nbsp;</a></li>
+			    <li><a href="https://hotelntour.co.kr/m/company_agreement.do" id="termsUseLink">이용약관&nbsp;&nbsp;|&nbsp;</a></li>
+			    <li><a href="https://hotelntour.co.kr/m/company_personal.do" id="termsPersonalLink">개인정보취급방침</a></li>
+			    <li><a href="https://hotelntour.co.kr/m/company_insurance.do" id="insuranceLink">&nbsp;&nbsp;|&nbsp;안심보험 가입</a></li>
+			</ul>
+            <p>
+               (06070) 서울시 강남구 도산대로 506, 2층(청담동, 재정빌딩)<br>
+               (주)호텔엔투어 | 대표이사 : 유태선 <br>
+                사업자등록번호 : 762-88-00877 <br>
+               통신신고번호 : 2018-서울강남-01061<br>
+               Copyright ⓒ Hotelntour Co., Ltd.<br>
+               All Rights Reserved.
+            </p>
+         </div>
+         <div class="fix_form">
+	         <div class="arrow_wrap">
+		         <div class="top arrow_btn"><img src="https://hotelntour.co.kr/image/icon/top.png"></div>
+		         <div class="bottom arrow_btn"><img src="https://hotelntour.co.kr/image/icon/bottom.png"></div>
+	         </div>
+	         <!-- 박람회 신청하기 버튼 -->
+            <a href="javascript:;" class="floating"><img src="https://hotelntour.co.kr/image/expo/application_btn.png"/></a>
+         </div>
+
+		<!--free Invite modal page-->
+			 <div id="new-modal" class="modal-background" style="display:none;">
+			    <div class="modal-content">
+			    <a class="modal-close" href="javascript:;"><i class="bi bi-x-lg"></i></a><br>
+					<div class="honey-font">호텔엔투어 박람회</div>
+						<div class="free-invite"><img src="https://new.honeymoonresort.co.kr/new_ver/img/hotelexpo/free_invite.png"></div>
+					        <form id="free-invite" >
+					        	<div class="invite-line"></div>
+					            <div class="name-input"><label>이         름*</label><input type="text" class="userName" name="userName" placeholder="이름을 입력해주세요." /></div>
+					            <div class="invite-line"></div>
+					            <div class="name-input"><label>연   락   처*</label><input type="text"  class="phoneNumber" oninput="oninputPhone(this)" maxlength="13" name="phoneNumber" placeholder="'-'없이 입력해주세요."/></div>
+					            <div class="invite-line"></div>
+					            <div class="name-input"><label>출발예정일*</label><input type="date" class="weddingDate" name="weddingDate" placeholder="출발예정일을 선택해주세요." /></div>
+					            <div class="invite-line"></div>
+					            <div class="name-input"><label>방   문   일*</label><select class="visitDate appSelect" name="visitDate"><option value="0">방문일을 선택해주세요</option>
+					            	
+					            		<option value="2026-10-31">2026-10-31</option>
+					            	
+					            		<option value="2026-11-01">2026-11-01</option>
+					            	
+					            </select></div>
+					            <div class="invite-line"></div>
+					            <div class="name-input"><label>장         소</label><select class="location appSelect" name="location">
+					            	
+					            		<option value="호텔엔투어 서울 본사">호텔엔투어 서울 본사</option>
+					            	
+								</select></div>
+					            <div class="invite-line"></div>
+					            <div class="collection"><label>개인정보 수집 및 이용에 동의합니다.</label> <input type="checkbox" id="agree" name="agree" /></div>
+					            <div class="free-input" type="text">
+					            	<p>
+					            	1. 수집하는 개인정보 항목 <br>
+					            	이용자는 무료초대권 신청하기 또는 상담신청을 하지 않아도 정보 검색, 컨텐츠 보기 등 대부분 사이트의 서비스를 이용할 수 있습니다. 
+					            	이용자가 무료초대권 신청하기 또는 상담신청을 할 경우 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다. <br>
+					            	회사가 무료초대권 신청하기 또는 상담신청시 이용자로부터 수집하는 개인정보는 아래와 같습니다. <br>
+					            	- 성명, 휴대폰번호, 방문일자 <br>※ 쿠키 관련 내용은 수집하지 않습니다. <br>회사는 아래의 방법을 통해 개인정보를 수집합니다. <br>
+					            	사이트에서 서비스 이용 과정에서 이용자가 개인정보 수집에 대해 동의를 하고 직접 정보를 입력하는 경우, 해당 개인정보를 수집합니다. <br>
+					            	오프라인에서 진행되는 박람회, 박람회 등에서 서면을 통해 개인정보가 수집될 수 있습니다. <br><br>2. 수집한 개인정보의 이용목적 <br>
+					            	회사는 아래의 목적으로만 개인정보를 이용합니다. <br>- 허니문박람회 행사 참가 무료초대권 및 입장권 발급을 위해 개인정보를 확인하고 있습니다. <br>
+					            	- 서비스 이용기록과 통계에 따른 맞춤 서비스 제공 등에 개인정보를 이용합니다. <br><br>3. 수집한 개인정보의 보유 및 이용기간 <br>
+					            	회사는 법령에 따라 개인정보를 보관하고 기간이 지나면 파기합니다. <br>
+					            	전자상거래 등에서의 소비자 보호에 관한 법률, 전자금융거래법, 통신비밀보호법 등 법령에서 일정기간 정보의 보관을 규정하는 경우는 다음과 같습니다. <br>
+					            	- 전자상거래 등에서 소비자 보호에 관한 법률 <br>계약 또는 청약철회 등에 관한 기록 : 5년 보관 <br>대금결제 및 재화 등에 공급에 관한 기록 : 5년 보관 <br>
+					            	소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 보관 <br>- 전자금융거래법 <br>전자금융에 관한 기록 : 5년 보관 <br>- 통신비밀보호법 <br>박람회참가 및 문의 신청기록 : 1년 <br>
+					            	이용자에게 동의 받은 개인정보 보유기간의 도래와 같이 개인정보의 수집 및 이용목적이 달성된 개인정보는 재생이 불가능한 방법으로 파기하고 있습니다. <br>
+					            	법령에서 보존의무를 부과한 정보에 대해서도 해당 기간 경과 후 지체 없이 재생이 불가능한 방법으로 파기합니다. <br>
+					            	전자적 파일 형태의 경우 복구 및 재생이 되지 않도록 기술적인 방법을 이용하여 안전하게 삭제하며, 출력물 등은 분쇄하거나 소각하는 방식 등으로 파기합니다. <br>
+					            	고객의 삭제요청 후 5일 까지 보유
+					            	</p>
+					            </div>
+					        	<a class="button btnFade btnBlueGreen" type="button" onclick="invite()">신청하기</a>
+					        </form>
+					        
+					        <div id="invite-modal" class="invite-modalimg">
+					        	<div class="maodl-content">
+					        		<span class="alert_close" onclick="location.reload();">X</span>
+					        		<img src="https://hotelntour.co.kr/image/expo/complete.png" id="modalImage"/>
+					        	</div>
+					        </div>
+			    </div>
+			</div>
+			
+			
+			
+      </div>
+   </div><!-- container -->
+</div><!-- wrap -->
+<script type="text/javascript">
+$(function() {
+	initMap();
+});
+
+function initMap() {
+	var mapOptions = {
+		    center: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    zoom: 17,
+		};
+
+		var map = new naver.maps.Map('map', mapOptions); // 'map'은 HTML 요소의 id
+
+		var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    zoom: 17
+		});
+
+		var contentString = [
+		    '<div class="customoverlay" style="width:110px">',
+		    '   <h4>호텔엔투어</h4>',
+		    '</div>'
+		].join('');
+
+		var marker = new naver.maps.Marker({
+		    position: new naver.maps.LatLng(37.5239281, 127.0482246),
+		    map: map
+		});
+
+		var infowindow = new naver.maps.InfoWindow({
+
+		    content: contentString,
+		    borderWidth: 0,
+		    disableAnchor: true,
+		    backgroundColor: 'transparent',
+
+		    pixelOffset: new naver.maps.Point(20, -21)
+		});
+
+		infowindow.open(map, marker);
+}
+
+	
+function showSideBar() {
+   $(".modal_background").css("display", "flex");
+}
+
+</script>
+
+<!-- 아래의 코드를 <body> 여는 태그 다음에 넣어주세요. -->
+<!-- Google Tag Manager (noscript) -->
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+<style>
+  #pv-badge{position:fixed;left:10px;bottom:10px;z-index:99999;background:rgba(42,28,18,.85);color:#fff;font:600 12px/1.4 sans-serif;padding:6px 10px;border-radius:6px}
+  #pv-badge a{color:#ffd23c}
+  #free-invite input,#free-invite select{pointer-events:none;opacity:.5}
+</style>
+<div id="pv-badge">시안 미리보기 · 실제 신청 불가 · <a href="index.html?m">PC 시안 보기</a></div>
+<script>
+  (function(){
+    function block(){
+      window.invite=function(){ alert("시안 미리보기 페이지입니다.\n실제 신청은 호텔엔투어 공식 박람회 페이지에서 해 주세요."); };
+      document.querySelectorAll("#free-invite input, #free-invite select").forEach(function(el){ el.disabled=true; });
+    }
+    block(); addEventListener("DOMContentLoaded",block); addEventListener("load",block);
+  })();
+</script>
+</body>
+</html>
