@@ -788,3 +788,93 @@ body{padding:0;background:#0b1620;background-image:none}
 .portrait .final .apply .as{font-size:15px;margin-bottom:10px}
 .portrait .final .apply small{margin-top:8px}
 .portrait .final .apply .navrow[style]{margin-top:8px!important}
+
+/* ===================== 2026.10 수정: 계절 소품 · 가독성 · CTA ===================== */
+:root{ --cta:#9b1ff0; --cta-dk:#5a0f8f; }
+
+/* 계절 소품 — game.js의 DECO / addDeco */
+.mid{position:relative}
+.deco{position:absolute;inset:0;pointer-events:none}
+.deco.mid,.portrait .deco.side{display:none}
+.portrait .deco.mid{display:block}
+.prop{position:absolute;background-size:100% 100%;image-rendering:pixelated;filter:drop-shadow(8px 6px 0 rgba(20,40,50,.2));
+  transform-origin:50% 100%;opacity:0;transform:translateY(60px) scale(var(--fx,1),.4);
+  transition:opacity .45s steps(4) var(--d,.3s),transform .6s steps(6) var(--d,.3s)}
+.prop.flip{--fx:-1}
+.stage.in .prop{opacity:1;transform:scale(var(--fx,1),1)}
+.p-palm,.p-pine{animation:sway 2.4s steps(2) infinite}
+.p-palm.flip{animation-delay:-1.2s}
+@keyframes sway{50%{rotate:1.5deg}}
+.p-isle{filter:none}
+.portrait .prop{filter:drop-shadow(5px 4px 0 rgba(20,40,50,.2))}
+
+/* 한글은 픽셀 영문 폰트 대신 제목 폰트로 (글자가 깨져 보이지 않게) */
+.go{font-family:var(--f-head);font-weight:400;letter-spacing:0}
+.go .en{font-family:var(--f-px);font-size:.8em;margin-right:6px}
+.go.start{font-size:30px;padding:20px 40px;background:var(--gold)}
+
+/* 출발 화면 */
+.hero p.lead{font-size:26px;color:var(--ink)}
+.hero mark{background:linear-gradient(transparent 55%,#ffe27a 55%);color:var(--ink);padding:0 2px}
+.showcase{position:relative;z-index:2;width:1180px;margin:34px auto 0;background:var(--paper);padding:16px 22px 14px;text-align:center}
+.sc-h{margin:0 0 12px;font-family:var(--f-head);font-size:26px;line-height:1}
+.sc-h b{font-weight:400;background:var(--ink);color:var(--gold);padding:6px 16px}
+.sc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sc-item{display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border:3px solid var(--ink);padding:10px 12px;
+  font-family:var(--f-head);font-size:21px;line-height:1.2;word-break:keep-all;box-shadow:3px 3px 0 rgba(42,28,18,.35)}
+.sc-item .ic{width:44px;height:44px;flex:none;image-rendering:pixelated;border:3px solid var(--ink);background:var(--paper2)}
+.sc-note{margin:12px 0 0;font-size:17px;color:var(--muted)}
+#st-draw .cols{min-height:110px}
+
+/* 문항 카드 설명 글씨 진하게 */
+.opt .d{color:#5a4a37}
+.opts.big .opt .d{font-size:19px;word-break:keep-all}
+
+/* 결과 카드 */
+.fsec h3{font-family:var(--f-head);font-size:19px;color:var(--ink);letter-spacing:0;display:flex;align-items:center;gap:8px}
+.fsec h3::before{content:"";width:12px;height:12px;background:var(--a);border:2px solid var(--ink)}
+.famtype.big p{color:var(--ink)}
+.conds span{font-size:16px}
+.prod{font-family:var(--f-head);font-weight:400;font-size:19px;line-height:1.2;word-break:keep-all;opacity:.55;background:#fff}
+.prod.pick{background:var(--gold)}
+.prod.pick::after{font-family:var(--f-head);font-size:15px;padding:3px 8px;top:-14px}
+
+/* 결과: 신청 상자 — 박람회 페이지 신청 버튼과 같은 보라색 CTA */
+.final .apply{padding:30px 34px 22px;word-break:keep-all}
+.final .apply .ak{font-size:24px;color:var(--b-dk)}
+.final .apply h3{font-size:46px;line-height:1.2;margin:6px 0 10px}
+.apply h3 em{font-style:normal;color:var(--cta);background:linear-gradient(transparent 60%,#ffe27a 60%)}
+.final .apply .as{font-size:20px;color:#5a4a37;margin-bottom:22px}
+.cta{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;width:100%;padding:24px 26px;
+  background:var(--cta);color:#fff;text-decoration:none;font-family:var(--f-head);font-size:40px;line-height:1;
+  border:4px solid var(--ink);box-shadow:inset -6px -6px 0 rgba(0,0,0,.25),inset 6px 6px 0 rgba(255,255,255,.28),0 8px 0 var(--cta-dk),8px 14px 0 rgba(42,28,18,.35);
+  animation:ctaGlow 1.6s steps(2) infinite;transition:transform .1s}
+.cta .ca{font-size:.7em;animation:nudge .8s steps(2) infinite}
+.cta:hover{transform:translateY(3px);box-shadow:inset -6px -6px 0 rgba(0,0,0,.25),inset 6px 6px 0 rgba(255,255,255,.28),0 5px 0 var(--cta-dk),8px 10px 0 rgba(42,28,18,.35)}
+.cta:active{transform:translateY(8px);box-shadow:inset -6px -6px 0 rgba(0,0,0,.25),inset 6px 6px 0 rgba(255,255,255,.28)}
+.cta:focus-visible{outline:5px solid var(--gold);outline-offset:4px}
+@keyframes ctaGlow{50%{background:#a93cff}}
+@keyframes nudge{50%{transform:translateX(5px)}}
+.apply .hurry{margin:18px 0 0;font-size:18px;color:var(--bad)}
+.final .apply small{font-size:16px;margin-top:6px}
+.retry{margin-top:16px;background:none;border:0;padding:4px 8px;font-size:17px;color:var(--muted);text-decoration:underline;text-underline-offset:4px}
+.retry:hover{color:var(--ink)}
+
+/* 세로 화면 */
+.portrait .go.start{font-size:26px;padding:18px 26px}
+.portrait .hero p.lead{font-size:22px}
+.portrait .showcase{width:auto;margin-top:22px;padding:14px 14px 12px}
+.portrait .sc-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.portrait .sc-item{font-size:19px;padding:8px 10px;gap:10px}
+.portrait .sc-item .ic{width:36px;height:36px}
+.portrait .sc-note{font-size:15px}
+.portrait #st-draw .cols{min-height:110px}
+.portrait .opts.big .opt .d{font-size:19px}
+.portrait .final .apply .ak{font-size:20px}
+.portrait .final .apply h3{font-size:36px}
+.portrait .final .apply .as{font-size:17px;margin-bottom:14px}
+.portrait .cta{font-size:32px;padding:20px 18px}
+.portrait .apply .hurry{font-size:16px;margin-top:14px}
+.portrait .retry{margin-top:8px}
+.fcard{word-break:keep-all}
+.prod.pick span{padding-right:22px}

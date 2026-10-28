@@ -209,26 +209,26 @@ const APPLY_URL="#fair";   // "박람회 신청하러 가기" 버튼이 가는 �
 const START={city:"서울", temp:-8};
 
 const STAGES=[
-  { key:"who", no:"STAGE 1", city:"삿포로", temp:-6, title:"이번 겨울방학, 누구랑 떠나요?", opts:[
-    {icon:"kids",     name:"우리 가족끼리",   desc:"아이와 함께하는 방학 여행",         s:{rest:2,learn:1}},
+  { key:"who", no:"STAGE 1", city:"유럽", temp:2, title:"이번 겨울방학, 누구랑 떠나요?", opts:[
+    {icon:"kids",     name:"우리 가족끼리",   desc:"아이와 함께하는 방학 여행",         s:{learn:2,rest:1}},
     {icon:"family",   name:"6인 이상 대가족", desc:"할머니·할아버지·친척까지 다 같이", s:{big:3}},
     {icon:"city",     name:"회사·모임 단체",  desc:"워크숍, 포상, 동호회 여행",         s:{group:3}},
-    {icon:"heart",    name:"둘이서 오붓하게", desc:"부부·커플 여행",                    s:{rest:2,golf:1}} ]},
-  { key:"want", no:"STAGE 2", city:"도쿄", temp:7, title:"이번 여행, 제일 하고 싶은 건?", opts:[
-    {icon:"golf",     name:"골프 라운딩",       desc:"따뜻한 데서 마음껏 치고 싶어",   s:{golf:3}},
-    {icon:"book",     name:"아이 영어 체험",    desc:"방학을 알차게 보내고 싶어",      s:{learn:3}},
-    {icon:"palm",     name:"아무것도 안 하기",  desc:"바다 보면서 푹 쉬기",            s:{rest:3}},
-    {icon:"camera",   name:"다 같이 추억 만들기", desc:"단체 일정, 행사, 파티",        s:{group:2,big:1}} ]},
-  { key:"stay", no:"STAGE 3", city:"타이베이", temp:17, title:"숙소는 어떤 스타일?", opts:[
-    {icon:"bed",      name:"넓은 콘도·풀빌라", desc:"여럿이 한 곳에서 편하게",          s:{big:2,group:1}},
-    {icon:"pool",     name:"바다 앞 리조트",   desc:"창문 열면 바로 바다",              s:{rest:2}},
-    {icon:"bag",      name:"시내 호텔",        desc:"학교·쇼핑·맛집 다니기 편하게",     s:{learn:2}},
-    {icon:"golf",     name:"골프장 가까운 곳", desc:"아침 일찍 티오프",                 s:{golf:2}} ]},
-  { key:"pace", no:"STAGE 4", city:"다낭", temp:23, title:"하루 일정은 어떻게 짤까요?", opts:[
-    {icon:"spa",      name:"오전엔 놀고 오후엔 쉬고", desc:"적당히 놀고 적당히 쉬고",   s:{learn:1,golf:1,rest:1}},
+    {icon:"heart",    name:"둘이서 오붓하게", desc:"부부·커플 여행",                    s:{golf:2,rest:1}} ]},
+  { key:"want", no:"STAGE 2", city:"호주", temp:21, title:"이번 겨울, 어디로 떠나고 싶어요?", opts:[
+    {icon:"volcano",  name:"하와이", desc:"화산과 바다, 대자연을 품은 올라운더 휴양지",   s:{golf:2,learn:1}},
+    {icon:"villa",    name:"몰디브", desc:"프라이빗 풀빌라에서 즐기는 럭셔리 휴양의 정석", s:{rest:2}},
+    {icon:"temple",   name:"발리",   desc:"해변에서 정글까지, 다채로운 활동과 쉼의 공존", s:{big:1,rest:1}},
+    {icon:"tower",    name:"유럽",   desc:"근대 문명의 보고, 다양한 랜드마크와 관광",     s:{learn:2,group:1}} ]},
+  { key:"stay", no:"STAGE 3", city:"태국", temp:24, title:"숙소는 어떤 스타일?", opts:[
+    {icon:"pool",     name:"바다 앞 리조트",      desc:"창문을 열면 바로 바다",                 s:{rest:2}},
+    {icon:"bag",      name:"시내 호텔",           desc:"맛집·쇼핑센터 접근성",                  s:{learn:2,group:1}},
+    {icon:"crown",    name:"프라이빗한 분위기",   desc:"럭셔리한 분위기, 5성급 서비스",         s:{golf:2,rest:1}},
+    {icon:"bed",      name:"넓은 객실·레지던스",  desc:"간이 주방, 거실과 베드룸이 분리된 객실", s:{big:2,group:1}} ]},
+  { key:"pace", no:"STAGE 4", city:"발리", temp:26, title:"하루 일정은 어떻게 짤까요?", opts:[
+    {icon:"spa",      name:"오전엔 놀고 오후엔 쉬고", desc:"적당히 놀고 적당히 쉬고",   s:{golf:1,learn:1}},
     {icon:"bed",      name:"느긋하게 하루 하나",      desc:"늦잠은 필수",              s:{rest:2}},
     {icon:"mountain", name:"꽉 채워서 알차게",        desc:"갈 수 있는 데는 다 가기",   s:{group:1,learn:1}},
-    {icon:"scale",    name:"전문가가 짜 준 대로",     desc:"우리 일정에 맞춘 단독 일정", s:{group:2,big:1}} ]},
+    {icon:"scale",    name:"전문가가 짜 준 대로",     desc:"우리 일정에 맞춘 단독 일정", s:{group:1,big:1}} ]},
   { key:"when", no:"STAGE 5", city:"하와이", temp:27, title:"언제 떠날까요?", opts:[
     {icon:"tree",     name:"12월 말",          desc:"방학 시작하자마자",   s:{}},
     {icon:"snowman",  name:"1월",              desc:"방학 한가운데",       s:{}},
@@ -259,6 +259,11 @@ ICONS.golf=["....kr....","....krr...","....krrr..","....krr...","....kr....","..
 ICONS.book=["..........","kkkkkkkkkk","kbbbbkyyyk","kbwwbkywyk","kbbbbkyyyk","kbwwbkywyk","kbbbbkyyyk","kkkkkkkkkk",".k......k.",".........."];
 ICONS.snowman=["...kkkk...","..kkkkkk..","..kwwwwk..","..kkwwkk..","..kwwyrk..","...rrrr...",".kwwwwwwk.",".kwwkwwwk.",".kwwwwwwk.","..kkkkkk.."];
 ICONS.tree=["....y.....","....g.....","...ggg....","..ggrgg...","...ggg....","..ggggg...",".gggyggg..","ggggggggg.","....k.....","...kkk...."];
+ICONS.volcano=["...r..r...","....rr....","...kkkk...","...krrk...","..kgrggk..","..kggggk..",".kggggggk.","kggggggggk","bbbbbbbbbb","bwbbbbwbbb"];
+ICONS.villa=["....kk....","...kyyk...","..kyyyyk..",".kyyyyyyk.","kkkkkkkkkk",".kwwkwwwk.",".kwwkwwwk.","kkkkkkkkkk","bkbbkbbkbb","bbbwbbbbwb"];
+ICONS.tower=["....kk....","....kk....","....kk....","...kkkk...","...k..k...","..kkkkkk..","..k....k..",".k..kk..k.",".k.k..k.k.","kkk....kkk"];
+ICONS.opera=["..........","..k...k...",".kwk.kwk..",".kwwkkwwk.","kwwwkwwwwk","kkkkkkkkkk","kyyyyyyyyk","kkkkkkkkkk","bbbbbbbbbb","bwbbbbbwbb"];
+ICONS.crown=["..........","k...kk...k","kk.kyyk.kk","kykyyyykyk","kyyyyyyyyk","kyyryyryyk","kyyyyyyyyk","kkkkkkkkkk","..........",".........."];
 ICONS.tag=["......kk..",".....kyyk.","....kyyyyk","...kyykyk.","..kyyyyyk.",".kyyyyyk..","kyyyyyk...",".kyyyk....","..kyk.....","...k......"];
 
 /* ===================== 상태 ===================== */
@@ -310,7 +315,7 @@ function pick(st,p,i){
 function tasteOf(p){
   const sc={golf:0,group:0,big:0,learn:0,rest:0};
   STAGES.forEach(st=>Object.entries(st.opts[S.pick[p][st.key]].s).forEach(([k,v])=>sc[k]+=v));
-  return ["big","group","golf","learn","rest"].reduce((a,k)=>sc[k]>sc[a]?k:a,"big");   // 동점이면 앞쪽 우선
+  return ["golf","learn","big","group","rest"].reduce((a,k)=>sc[k]>sc[a]?k:a,"golf");   // 동점이면 앞쪽 우선(휴양은 맨 뒤)
 }
 const FAMILY_LOOK={A:{hair:"#3b2416",shirt:"#2fb5a8"}, B:{hair:"#14110f",shirt:"#f08a24"}};
 function renderWait(){
@@ -327,8 +332,8 @@ function renderFinal(){
       <div class="fh"><span class="pn">나의 여행 취향</span><span class="cn">${ty.name}</span></div>
       <div class="scene" id="scene${p}"><div class="fx"></div><span class="bubble" hidden></span><canvas></canvas></div>
       <div class="fsec famtype big"><h3>맞춤 여행 취향</h3><p>'${ty.name}'<small>${ty.desc}</small></p></div>
-      <div class="fsec"><h3>고른 답</h3><div class="conds">${STAGES.map(st=>`<span>${st.city} · ${st.opts[S.pick[p][st.key]].name}</span>`).join("")}</div></div>
-      <div class="fsec"><h3>추천 상품</h3><div class="prods">${PRODUCTS.map(x=>`<div class="prod${x.k===k?" pick":""}" data-icon="${x.icon}"><span>${x.t}</span></div>`).join("")}</div>
+      <div class="fsec"><h3>고른 답</h3><div class="conds">${STAGES.map(st=>`<span>${st.opts[S.pick[p][st.key]].name}</span>`).join("")}</div></div>
+      <div class="fsec"><h3>박람회 추천 상품</h3><div class="prods">${PRODUCTS.map(x=>`<div class="prod${x.k===k?" pick":""}" data-icon="${x.icon}"><span>${x.t}</span></div>`).join("")}</div>
         ${k==="rest"?`<p class="prod-note">한 발 빠른 특가 & 기간한정 휴양 상품을 추천해요</p>`:""}</div>
     </article>`;
     $$(`#st-final .pcol.L .prod`).forEach(d=>d.prepend(iconCanvas(d.dataset.icon)));
@@ -336,11 +341,13 @@ function renderFinal(){
   });
   $(".next",sec).innerHTML="";
   $("#st-final .pcol.R").innerHTML=`<div class="apply px">   <!-- 결과 화면: 길 오른쪽에 신청 버튼 -->
-      <h3>이 취향 그대로, 박람회에서 상담 받아 볼까요?</h3>
-      <p class="as">호텔엔투어로 미리 준비하는 겨울방학 · 특가 & 기간한정 상품</p>
-      <div class="navrow"><a class="go px" id="apply" href="${APPLY_URL}">박람회 신청하러 가기 ▶</a></div>
+      <p class="ak">'${TYPES[tasteOf("A")].name}'에게 딱 맞는 여행,</p>
+      <h3>박람회에서 <em>1:1 맞춤 상담</em><br>받아 보세요!</h3>
+      <p class="as">한 발 빠른 특가 &amp; 기간한정 상품을 미리 안내해 드려요</p>
+      <a class="cta" id="apply" href="${APPLY_URL}"><span class="ct">박람회 신청하러 가기</span><span class="ca" aria-hidden="true">▶</span></a>
+      <p class="hurry">사전 신청 고객만 상담 진행 · 조기 마감될 수 있어요</p>
       <small>자세한 내용은 호텔엔투어 맞춤여행 담당자께 확인하세요!</small>
-      <div class="navrow" style="margin-top:14px"><button class="go px backbtn" id="again" type="button">다시 고르기 ↺</button></div>
+      <button class="retry" id="again" type="button">↺ 처음부터 다시 고르기</button>
     </div>`;
   $("#again").onclick=reset;
   $("#apply").onclick=e=>{ jingle([784,988,1175,1568]);
@@ -357,7 +364,7 @@ function cheer(){   // 결과 화면에 도착하면 가족이 활짝 웃음
 
 /* ===================== 1920×1080 한 화면: 화면 단위로 길을 따라 내려가고, 내려갈수록 따뜻해짐 ===================== */
 let W=1920, H=1080;   // 가로 화면(PC). 세로로 긴 창(모바일)이면 fit()이 720×H 세로 화면으로 바꿈
-// 화면별 바닥 단계 — 0 눈, 1 초록 들판, 2 꽃밭, 3 해변 모래, 4 몰디브 바다 (출발, 삿포로, 도쿄, 타이베이, 다낭, 하와이, 결과)
+// 화면별 바닥 단계 — 0 눈, 1 초록 들판, 2 꽃밭, 3 해변 모래, 4 몰디브 바다 (출발, 유럽, 호주, 태국, 발리, 하와이, 결과)
 const CLIMATE=[0,0,1,2,3,4,4];
 const OUTFIT=["winter","long","short","sleeve","swim"];   // 바닥 단계별 옷차림
 let curIdx=-1;
@@ -399,13 +406,104 @@ $("#progress").onclick=e=>{ const b=e.target.closest("[data-i]"); if(b && !b.dis
 $("#board").addEventListener("click",e=>{ const b=e.target.closest(".waitbox [data-i]"); if(b) go(+b.dataset.i); });
 addEventListener("resize",fit);
 
+/* ===================== 계절 소품 =====================
+   바닥이 바뀔 때마다 그 계절 소품이 길 양옆에 솟아오름 (눈밭 전나무·눈사람 → 들판 야자수·덤불 → 꽃밭 히비스커스 → 해변 파라솔·불가사리 → 바다 야자수 섬)
+   PROP_ART: [가로, 세로, 그리기] — 작은 캔버스에 그리고 외곽선을 둘러 크게 키움 */
+const PROP_ART={
+  palm:[32,42,px=>{
+    for(let y=14;y<41;y++){ const cx=12+Math.round(Math.sin((40-y)/26*1.4)*4); px(cx-1,y,y%4<2?"#a86f35":"#8a5a2b",3,1); px(cx-1,y,"#c48a4a"); }
+    px(14,13,"#6b4426",2,2); px(17,14,"#6b4426",2,2);
+    [[-1,13,.55,.06],[1,13,.55,.06],[-1,9,1,.09],[1,9,1,.09],[-1,11,.1,.07],[1,11,.1,.07]].forEach(([dir,L,k1,k2])=>{
+      for(let s=0;s<=L;s++){ const x=16+dir*s, y=12-k1*s+k2*s*s;
+        px(x,y,s%2?"#3fa34d":"#7bd389"); px(x,y+1,"#2c7a37"); if(s>L/3 && s%2===0) px(x,y+2,"#2c7a37"); } });
+    px(15,9,"#3fa34d",3,3); px(16,8,"#7bd389");
+  }],
+  pine:[26,40,px=>{
+    const cx=13; px(cx-1,32,"#6b4426",3,5);
+    [[17,33,11],[9,24,8],[2,15,5]].forEach(([t,b,hw])=>{ for(let y=t;y<b;y++){ const half=Math.round(1+(y-t)/(b-t)*(hw-1));
+      for(let x=cx-half;x<=cx+half;x++) px(x,y, y-t<2 || (y===b-1 && (x+y)%3===0) || (y-t<4 && x===cx-half+1) ? "#ffffff" : x<cx ? "#2f7d4f" : "#246640"); } });
+    px(3,37,"#ffffff",20,2); px(6,36,"#ffffff",14,1);
+  }],
+  snowman:[22,30,px=>{
+    const disc=(cx,cy,r,col)=>{ for(let y=-r;y<=r;y++) for(let xx=-r;xx<=r;xx++) if(xx*xx+y*y<=r*r+r*.6) px(cx+xx,cy+y,col); };
+    disc(11,21,7,"#ffffff"); disc(11,11,5,"#ffffff"); px(5,23,"#dce9f6",4,3); px(7,14,"#dce9f6",2,2);
+    px(7,5,"#2a1c12",9,2); px(8,1,"#2a1c12",7,4); px(8,4,"#e5507c",7,1);
+    px(9,10,"#2a1c12"); px(13,10,"#2a1c12"); px(11,12,"#ff9f43",3,1);
+    px(6,15,"#e5507c",11,2); px(14,17,"#e5507c",2,3);
+    px(11,20,"#2a1c12"); px(11,23,"#2a1c12");
+    for(let i=0;i<4;i++){ px(3-i*.5+1,17-i,"#8a5a33"); px(18+i*.6,17-i,"#8a5a33"); }
+  }],
+  rock:[18,12,px=>{ px(2,4,"#8f9aa6",14,7); px(4,2,"#8f9aa6",9,2); px(3,9,"#6f7a86",13,2); px(4,2,"#ffffff",9,2); px(2,4,"#ffffff",5,1); px(11,4,"#ffffff",4,1); }],
+  bush:[22,13,px=>{
+    const disc=(cx,cy,r,col)=>{ for(let y=-r;y<=r;y++) for(let x=-r;x<=r;x++) if(x*x+y*y<=r*r+r*.6 && cy+y<=11) px(cx+x,cy+y,col); };
+    disc(6,8,4,"#2f8f3f"); disc(16,8,4,"#2f8f3f"); disc(11,6,5,"#3fa34d"); px(8,3,"#7bd389",3,1); px(4,6,"#62c065",2,1); px(15,6,"#62c065",2,1);
+  }],
+  hibiscus:[22,13,px=>{
+    const disc=(cx,cy,r,col)=>{ for(let y=-r;y<=r;y++) for(let x=-r;x<=r;x++) if(x*x+y*y<=r*r+r*.6 && cy+y<=11) px(cx+x,cy+y,col); };
+    disc(6,8,4,"#2f8f3f"); disc(16,8,4,"#2f8f3f"); disc(11,6,5,"#3fa34d");
+    [[6,6,"#ff4f7a"],[12,3,"#ff7eb6"],[16,7,"#ff4f7a"],[10,8,"#ffffff"]].forEach(([x,y,c])=>{ px(x-1,y,c,3,1); px(x,y-1,c,1,3); px(x,y,"#ffd23c"); });
+  }],
+  flower:[9,14,px=>{ px(4,6,"#2c7a37",1,7); px(5,9,"#3fa34d",2,1); px(2,10,"#3fa34d",2,1); px(2,2,"#ff4f7a",5,3); px(3,1,"#ff4f7a",3,5); px(4,3,"#ffd23c"); }],
+  umbrella:[30,34,px=>{
+    px(14,12,"#8a5a33",2,20); px(9,31,"#f3dca5",12,2);
+    for(let y=1;y<=12;y++) for(let x=1;x<=29;x++){ const dx=x-15, dy=y-12; if((dx/14)**2+(dy/11)**2>1) continue;
+      px(x,y, Math.floor((Math.atan2(dy,dx)+Math.PI)/(Math.PI/6))%2 ? "#ffffff" : "#e5507c"); }
+    px(14,0,"#2a1c12",2,1);
+  }],
+  starfish:[15,15,px=>{
+    for(let k=0;k<5;k++){ const a=-Math.PI/2+k*Math.PI*2/5; for(let t=0;t<=6;t+=.5){ px(7+Math.cos(a)*t,7+Math.sin(a)*t,"#ff8a3d", t<3?2:1, t<3?2:1); } }
+    px(6,6,"#ffb347",3,3); px(7,4,"#ffd23c"); px(10,7,"#ffd23c"); px(5,9,"#ffd23c");
+  }],
+  shell:[13,11,px=>{ for(let y=1;y<10;y++){ const half=Math.round((y)*.6); px(6-half,y,"#ffd0dc",half*2+1,1); } [3,6,9].forEach(x=>px(x,3,"#f29bb4",1,6)); px(5,9,"#f29bb4",3,1); }],
+  isle:[46,12,px=>{ for(let y=1;y<11;y++){ const half=Math.round(Math.sqrt(1-((y-6)/5)**2)*21); px(23-half,y,y<4?"#ffffff":y<6?"#a6f3e3":"#f3dca5",half*2,1); } px(10,6,"#ecd298",26,3); }]
+};
+const PROP={};
+function propSprite(n){
+  if(PROP[n]) return PROP[n];
+  const [w,h,draw]=PROP_ART[n], c=document.createElement("canvas"); c.width=w; c.height=h; const x=c.getContext("2d");
+  draw((a,b,col,ww=1,hh=1)=>{ x.fillStyle=col; x.fillRect(Math.round(a),Math.round(b),ww,hh); },x);
+  const d=x.getImageData(0,0,w,h), on=i=>d.data[i*4+3]>0, o=x.createImageData(w,h); o.data.set(d.data);
+  for(let y=0;y<h;y++) for(let xx=0;xx<w;xx++){ const i=y*w+xx; if(on(i)) continue;   // 픽셀 외곽선
+    if((xx>0&&on(i-1))||(xx<w-1&&on(i+1))||(y>0&&on(i-w))||(y<h-1&&on(i+w))) o.data.set([42,28,18,255],i*4); }
+  x.putImageData(o,0,0); return PROP[n]=c.toDataURL();
+}
+/* 바닥 단계별 배치 [소품, x, 바닥y, 배율, 좌우반전]
+   side: 가로 화면(문항 1500×1080 기준, 음수·1500 이상은 화면 양옆 여백) / mid: 세로 화면에서 표지판과 선택지 사이 띠(664×140) */
+const DECO=[
+  {side:[["pine",-200,560,7],["rock",-80,620,4],["pine",-150,880,5],["snowman",-190,1050,6],["pine",1520,470,6],["snowman",1590,760,6,1],["pine",1540,1040,7],["rock",1640,600,4]],
+   mid:[["pine",40,140,3],["snowman",150,136,3],["rock",210,138,2],["pine",560,140,3],["pine",470,132,2],["snowman",620,136,2,1]]},
+  {side:[["palm",-210,560,6],["bush",-150,640,4],["palm",-120,980,5,1],["bush",-210,1040,5],["palm",1505,520,6,1],["bush",1600,600,4],["palm",1540,1000,6],["bush",1510,1050,4]],
+   mid:[["palm",10,140,3],["bush",130,140,3],["palm",560,140,3,1],["bush",440,140,2]]},
+  {side:[["palm",-200,580,6],["hibiscus",-200,660,5],["flower",-60,700,5],["palm",-140,1010,5,1],["hibiscus",1520,560,5],["palm",1510,880,6,1],["flower",1660,950,5],["hibiscus",1560,1050,4]],
+   mid:[["palm",0,140,3],["hibiscus",120,140,3],["flower",250,138,3],["palm",560,140,3,1],["hibiscus",440,140,3]]},
+  {side:[["palm",-210,620,6,1],["umbrella",-180,980,6],["starfish",-60,700,4],["shell",-120,1040,4],["palm",1520,560,6],["umbrella",1560,900,5,1],["starfish",1640,1030,4],["shell",1530,700,4]],
+   mid:[["umbrella",30,140,3],["starfish",150,136,3],["palm",560,140,3],["shell",450,134,3]]},
+  {side:[["isle",-210,600,4],["palm",-170,575,5],["isle",1520,960,4],["palm",1560,935,5,1]],
+   mid:[["isle",10,138,3],["palm",30,124,3],["isle",470,138,3],["palm",530,124,3,1]]}
+];
+function addDeco(sec,lv){
+  $$(".deco",sec).forEach(d=>d.remove());
+  const mk=(list,cls,parent)=>{ if(!parent) return; const box=document.createElement("div"); box.className="deco "+cls; box.setAttribute("aria-hidden","true");
+    list.forEach(([n,x,y,z,flip],k)=>{ const [w,h]=PROP_ART[n], i=document.createElement("i");
+      i.className=`prop p-${n}${flip?" flip":""}`;
+      i.style.cssText=`left:${x}px;top:${y-h*z}px;width:${w*z}px;height:${h*z}px;background-image:url(${propSprite(n)});--d:${.35+k%4*.12}s`;
+      box.appendChild(i); });
+    parent.prepend(box); };
+  mk(DECO[lv].side,"side",sec); mk(DECO[lv].mid,"mid",$("[data-mark]",sec));
+}
+
 /* ===================== 시작 ===================== */
 function reset(){
   S=fresh(); outfit="";
   $("#tripInfo").innerHTML=`<span>❄ ${START.city} ${fmtT(START.temp)} 출발</span><span>☀ ${STAGES[STAGES.length-1].city} ${fmtT(STAGES[STAGES.length-1].temp)} 도착</span><span>길을 따라 내려가며 <b>여행 취향</b> 고르기</span>`;
+  // 출발 화면 하단: 의뢰서의 박람회 상품 4개
+  $("#showcase").innerHTML=`<p class="sc-h"><b>박람회 특별 상품</b></p><div class="sc-list">${PRODUCTS.map(x=>`<div class="sc-item" data-icon="${x.icon}"><span>${x.t}</span></div>`).join("")}</div>
+    <p class="sc-note">자세한 내용은 호텔엔투어 맞춤여행 담당자께 확인하세요!</p>`;
+  $$("#showcase .sc-item").forEach(d=>d.prepend(iconCanvas(d.dataset.icon)));
   const wrap=$("#stages"); wrap.innerHTML="";
   STAGES.forEach(st=>{ wrap.appendChild(stageShell(st)); renderOpts(st); });
   wrap.appendChild(stageShell({key:"final", no:"GOAL", title:"나의 맞춤 여행 취향"}));
+  sections().forEach((sec,i)=>addDeco(sec,CLIMATE[i]));
   renderWait();
   curIdx=-1; fit(); go(0,true);
 }
