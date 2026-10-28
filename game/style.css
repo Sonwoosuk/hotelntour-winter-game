@@ -907,3 +907,24 @@ body{padding:0;background:#0b1620;background-image:none}
 .portrait .cta.hit::after{left:calc(74% + 19px)}
 .go{display:inline-flex;align-items:center;justify-content:center;gap:12px;line-height:1}
 .go .en{margin:0;position:relative;top:1px}
+
+/* 손가락에 매달린 캐릭터: 날아가는 동안 뒤로 쏠리고, 도착하면 대롱대롱, 다리는 허둥지둥 */
+.walkers{transition:transform 1.3s cubic-bezier(.45,0,.3,1),opacity .15s}
+.walkers.grabbed{opacity:0}
+.hanger{position:absolute;left:50%;top:58px;width:70px;height:95px;margin-left:-35px;background-size:140px 95px;background-repeat:no-repeat;
+  image-rendering:pixelated;transform-origin:50% 4px;filter:drop-shadow(3px 4px 0 rgba(42,28,18,.35));
+  animation:flail .16s steps(1) infinite,hangFly .85s ease-out both}
+.hanger.arrived{animation:flail .16s steps(1) infinite,dangle .7s ease-in-out infinite alternate}
+.hanger.drop{animation:flail .16s steps(1) infinite,hangDrop .7s cubic-bezier(.5,0,.9,.5) forwards}
+@keyframes flail{0%{background-position:0 0}50%{background-position:-70px 0}}
+@keyframes hangFly{from{rotate:10deg}35%{rotate:48deg}to{rotate:38deg}}
+@keyframes dangle{from{rotate:-16deg}to{rotate:16deg}}
+@keyframes hangDrop{from{rotate:0deg;translate:0 0;opacity:1}to{rotate:-40deg;translate:-30px 260px;opacity:0}}
+.hang-say{position:absolute;left:-118px;top:40px;white-space:nowrap;background:#fff;color:var(--ink);border:3px solid var(--ink);padding:3px 10px;
+  font-family:var(--f-head);font-weight:400;font-size:24px;line-height:1.2;animation:pop .3s steps(3)}
+.portrait .hanger{top:50px;width:56px;height:76px;margin-left:-28px;background-size:112px 76px}
+.portrait .hanger{animation-name:flail2,hangFly}
+.portrait .hanger.arrived{animation-name:flail2,dangle}
+.portrait .hanger.drop{animation-name:flail2,hangDrop}
+@keyframes flail2{0%{background-position:0 0}50%{background-position:-56px 0}}
+.portrait .hang-say{left:-104px;font-size:17px}

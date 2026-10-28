@@ -368,11 +368,33 @@ let handURL;
 function swoosh(){
   const cta=$("#apply"); if(!cta || curIdx<=STAGES.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if(!handURL){ const c=document.createElement("canvas"); c.width=12; c.height=14; drawSprite(HAND,{k:"#2a1c12",w:"#ffffff"},1,c.getContext("2d"),0); handURL=c.toDataURL(); }
-  $$(".hand",cta).forEach(h=>h.remove()); cta.classList.remove("hit");
+  $$(".hand",cta).forEach(h=>h.remove()); cta.classList.remove("hit"); clearTimeout(swooshT); clearTimeout(dropT);
   [3,2,1,0].forEach(g=>{ const h=document.createElement("i"); h.className="hand"+(g?" ghost":""); h.setAttribute("aria-hidden","true");
     h.style.backgroundImage=`url(${handURL})`; h.style.setProperty("--g",g); cta.appendChild(h); });   // 뒤따르는 잔상 3개 + 진짜 손
+  // 길 위의 캐릭터가 손에 붙잡혀 대롱대롱 매달려 감
+  const hand=$(".hand:not(.ghost)",cta), hang=document.createElement("i"), say=document.createElement("b");
+  hang.className="hanger"; hang.style.backgroundImage=`url(${hangSheet()})`; say.className="hang-say"; say.textContent="으아아~!";
+  hand.append(hang,say); $("#walkers").classList.add("grabbed");
   [260,420,640,980].forEach((f,i)=>beep(f,.09,"triangle",i*.06));   // 슈웅
-  setTimeout(()=>{ cta.classList.add("hit"); jingle([1047,1319]); },850);
+  swooshT=setTimeout(()=>{ cta.classList.add("hit"); hang.classList.add("arrived"); say.textContent="여기예요!"; jingle([1047,1319]); },850);
+  dropT=setTimeout(()=>{   // 손을 놓고 떨어지면 다시 길 위에 나타남
+    hang.classList.add("drop"); say.textContent="으앗!"; [880,660,440,330].forEach((f,i)=>beep(f,.07,"square",i*.05));
+    setTimeout(()=>{ say.remove(); $("#walkers").classList.remove("grabbed"); },700);
+  },3300);
+}
+let swooshT, dropT, hangURL;
+function hangSheet(){   // 두 팔 번쩍 + 다리 버둥 2컷 (수영복)
+  if(hangURL) return hangURL;
+  const pal=WALK_PAL.swim, c=document.createElement("canvas"); c.width=28; c.height=19; const x=c.getContext("2d");
+  [SWIM_A,SWIM_A2].forEach((rows,f)=>{
+    const ox=f*14, body=rows.map((r,y)=> y===10||y===11 ? ".k"+r.slice(2,10)+"k." : r);   // 내려온 팔 지우기
+    x.save(); x.translate(ox+1,3); drawSprite(body,pal,1,x,0); x.restore();
+    const arm=(ax,sx)=>{ x.fillStyle=pal.k; x.fillRect(ax,0,2,1); x.fillRect(ax+(sx?1:0),1,1,12); x.fillStyle=pal.s; x.fillRect(ax+(sx?0:1),1,1,11); };
+    arm(ox,0); arm(ox+12,1);
+    x.fillStyle=pal.s; x.fillRect(ox+1,12,2,1); x.fillRect(ox+11,12,2,1);   // 어깨로 이어지는 팔
+    x.fillStyle="#7fd3ff"; x.fillRect(ox+(f?2:11),4,1,2);   // 진땀
+  });
+  return hangURL=c.toDataURL();
 }
 
 /* ===================== 1920×1080 한 화면: 화면 단위로 길을 따라 내려가고, 내려갈수록 따뜻해짐 ===================== */
@@ -400,6 +422,7 @@ function go(i, instant){
   const lv=CLIMATE[i];   // 위 층부터 차례로 걷어 내면 아래 바닥이 드러남
   ["snow","green","flower","sand"].forEach((n,j)=>scr.style.setProperty("--"+n, lv<=j?1:0));
   setWalkerColors(OUTFIT[lv]);
+  if(i!==secs.length-1) $("#walkers").classList.remove("grabbed");   // 결과 화면을 떠나면 손에 매달렸던 캐릭터를 길로 돌려놓음
   secs[i].classList.add("in");
   if(i!==curIdx){ curIdx=i; setProgress(i); walkTo(secs[i]); $("#progress").hidden=i===0;
     if(i===secs.length-1) cheer(); }
