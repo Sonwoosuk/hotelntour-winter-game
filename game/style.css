@@ -878,3 +878,32 @@ body{padding:0;background:#0b1620;background-image:none}
 .portrait .retry{margin-top:8px}
 .fcard{word-break:keep-all}
 .prod.pick span{padding-right:22px}
+
+/* 정렬: 칩·표지판 글자를 세로 가운데로 (굵은 글씨·픽셀 폰트가 섞여도 높이 동일) */
+.trip-info{align-items:center}
+.trip-info span{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 16px;line-height:1}
+.trip-info b{font-weight:800;line-height:1}
+.portrait .trip-info span{height:38px;padding:0 12px}
+.sign .no{display:flex;align-items:center;justify-content:center;gap:10px;line-height:1}
+.sign .no i{font-style:normal}
+.sign .no .wx{font-size:18px}
+.sign .no .ct{font-family:var(--f-head);font-size:20px;letter-spacing:0;color:var(--ink)}
+.portrait .sign .no .ct{font-size:17px}
+.portrait .sign .no .wx{font-size:15px}
+.sc-item span,.prod span{display:block}
+
+/* 결과: 손가락 커서 슈웅 → 신청 버튼 톡톡 */
+.hand{position:absolute;left:74%;top:44%;z-index:3;width:60px;height:70px;background-size:100% 100%;image-rendering:pixelated;pointer-events:none;
+  --fx:-780px;--fy:-440px;filter:drop-shadow(4px 4px 0 rgba(42,28,18,.45));
+  animation:swoosh .85s cubic-bezier(.55,0,.25,1) both,tap .9s steps(2) .95s infinite}
+.hand.ghost{filter:none;animation:swooshG .85s cubic-bezier(.55,0,.25,1) calc(var(--g) * .06s) both}
+@keyframes swoosh{from{transform:translate(var(--fx),var(--fy)) rotate(-28deg) scale(1.4);opacity:0}12%{opacity:1}to{transform:none;opacity:1}}
+@keyframes swooshG{from{transform:translate(var(--fx),var(--fy)) rotate(-28deg) scale(1.4);opacity:.45}85%{opacity:.25}to{transform:none;opacity:0}}
+@keyframes tap{50%{transform:translate(3px,6px) scale(.88)}}
+.cta.hit::after{content:"";position:absolute;left:calc(74% + 22px);top:44%;width:28px;height:28px;margin:-14px;border:4px solid #fff;pointer-events:none;
+  animation:ring .9s steps(4) infinite}
+@keyframes ring{from{transform:scale(.3);opacity:1}to{transform:scale(2.6);opacity:0}}
+.portrait .hand{--fx:-260px;--fy:-600px;width:52px;height:60px}
+.portrait .cta.hit::after{left:calc(74% + 19px)}
+.go{display:inline-flex;align-items:center;justify-content:center;gap:12px;line-height:1}
+.go .en{margin:0;position:relative;top:1px}

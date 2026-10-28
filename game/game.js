@@ -278,8 +278,8 @@ const allDone=()=>STAGES.every(stageDone);
 /* ===================== 스테이지 ===================== */
 function stageShell(st){
   const sec=document.createElement("section"); sec.className="stage q"+(st.key==="final"?" final":""); sec.id="st-"+st.key;
-  const sub= st.city ? `<span class="wx">${st.temp<10?"❄":st.temp<20?"☁":"☀"}</span> ${st.city} ${fmtT(st.temp)}` : "";
-  sec.innerHTML=`<div class="sign"><div class="board-s px"><div class="no">${st.no}${sub?` · ${sub}`:""}</div><h2>${st.title}</h2></div><div class="post"></div></div>
+  const sub= st.city ? `<i>·</i><span class="wx">${st.temp<10?"❄":st.temp<20?"☁":"☀"}</span><span class="ct">${st.city}</span><span>${fmtT(st.temp)}</span>` : "";
+  sec.innerHTML=`<div class="sign"><div class="board-s px"><div class="no"><span>${st.no}</span>${sub}</div><h2>${st.title}</h2></div><div class="post"></div></div>
   <div class="cols"><div class="pcol L A"></div><div class="mid" data-mark></div><div class="pcol R A"></div></div><div class="next"></div>`;
   return sec;
 }
@@ -360,6 +360,19 @@ function renderFinal(){
 function cheer(){   // 결과 화면에 도착하면 가족이 활짝 웃음
   if(S.cheered || !allDone()) return; S.cheered=true;
   setTimeout(()=>{ PLAYERS.forEach((p,i)=>{ S.cust[p]=FAMILY_LOOK[p]; setMood(p,100); $(`#scene${p} .bubble`).textContent="우리 취향 딱이야!"; }); },500);
+  setTimeout(swoosh,1500);
+}
+/* 결과 화면: 손가락 커서가 "박람회 신청하러 가기" 버튼으로 슈웅 날아가 톡톡 누름 */
+const HAND=["....kk......","...kwwk.....","...kwwk.....","...kwwk.....","...kwwkkk...","...kwwkwwkk.",".kkkwwkwwkwk","kwwkwwwwwkwk","kwwwwwwwwwwk",".kwwwwwwwwwk","..kwwwwwwwk.","..kwwwwwwwk.","...kwwwwwk..","...kkkkkkk.."];
+let handURL;
+function swoosh(){
+  const cta=$("#apply"); if(!cta || curIdx<=STAGES.length || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if(!handURL){ const c=document.createElement("canvas"); c.width=12; c.height=14; drawSprite(HAND,{k:"#2a1c12",w:"#ffffff"},1,c.getContext("2d"),0); handURL=c.toDataURL(); }
+  $$(".hand",cta).forEach(h=>h.remove()); cta.classList.remove("hit");
+  [3,2,1,0].forEach(g=>{ const h=document.createElement("i"); h.className="hand"+(g?" ghost":""); h.setAttribute("aria-hidden","true");
+    h.style.backgroundImage=`url(${handURL})`; h.style.setProperty("--g",g); cta.appendChild(h); });   // 뒤따르는 잔상 3개 + 진짜 손
+  [260,420,640,980].forEach((f,i)=>beep(f,.09,"triangle",i*.06));   // 슈웅
+  setTimeout(()=>{ cta.classList.add("hit"); jingle([1047,1319]); },850);
 }
 
 /* ===================== 1920×1080 한 화면: 화면 단위로 길을 따라 내려가고, 내려갈수록 따뜻해짐 ===================== */
