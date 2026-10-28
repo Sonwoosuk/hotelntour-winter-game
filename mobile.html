@@ -32,7 +32,11 @@
 
 <!-- 아래의 코드를 <head></head> 태그 사이에 넣어주세요. -->
 <!-- Google Tag Manager -->
-
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WJZWGGLJ');</script>
 <!-- End Google Tag Manager -->
 
 </head>
@@ -83,7 +87,7 @@ $(document).ready(function() {
   	   /* 중분류 네비게이션 */
 	   // 서브 네비 메뉴
 		$.ajax({
-		    url: "/board/getExpoMenu.do",
+		    url: "https://new.honeymoonresort.co.kr/board/getExpoMenu.do",
 		    type: "post",
 		    success: function(response) {
 		        console.log(response);
@@ -127,7 +131,7 @@ $(document).ready(function() {
 
        //서브 네비 드롭다운 메뉴
 		$.ajax({
-		    url: "/board/getExpoMenu.do",
+		    url: "https://new.honeymoonresort.co.kr/board/getExpoMenu.do",
 		    type: "post",
 		    success: function(response) {
 		        let vacay_menu_append = "";
@@ -180,7 +184,7 @@ $(document).ready(function() {
        
        /* 컨텐츠 이미지 가져오기 */
 		$.ajax({ 
-		    url: "/board/getContentsAll.do",
+		    url: "https://new.honeymoonresort.co.kr/board/getContentsAll.do",
 		    type: "POST",
 		    success: function(response) {
 		        for (let item of response.mainImg) {
@@ -434,7 +438,7 @@ $(document).ready(function() {
 						                                
 						                            
 						                                
-						                                    <li class="subMenuLi" depth3="d4548872-be57-4f21-b1c2-160b666ce991.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
+						                                    <li class="subMenuLi" depth3="cb123d5e-106a-429a-a175-7ec7b9ae5063.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
 						                                
 						                            
 					                            </ul>
@@ -527,7 +531,7 @@ $(document).ready(function() {
 						                                
 						                            
 						                                
-						                                    <li class="subMenuLi" depth3="c2bf4bfa-0dbb-4367-a0c4-88464438b00a.jpg">몰디브 가족여행 추천 리조트</li>
+						                                    <li class="subMenuLi" depth3="fcac0f4e-7c57-4470-ad50-e49c753fbc7c.jpg">몰디브 가족여행 추천 리조트</li>
 						                                
 						                            
 						                                
@@ -1341,7 +1345,7 @@ $(document).ready(function() {
 						                                
 						                            
 						                                
-						                                    <li class="subMenuLi" depth3="d4548872-be57-4f21-b1c2-160b666ce991.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
+						                                    <li class="subMenuLi" depth3="cb123d5e-106a-429a-a175-7ec7b9ae5063.jpg">대한민국 최저가로 만나는 하와이 인기호텔</li>
 						                                
 						                            
 					                            </ul>
@@ -1434,7 +1438,7 @@ $(document).ready(function() {
 						                                
 						                            
 						                                
-						                                    <li class="subMenuLi" depth3="c2bf4bfa-0dbb-4367-a0c4-88464438b00a.jpg">몰디브 가족여행 추천 리조트</li>
+						                                    <li class="subMenuLi" depth3="fcac0f4e-7c57-4470-ad50-e49c753fbc7c.jpg">몰디브 가족여행 추천 리조트</li>
 						                                
 						                            
 						                                
@@ -2027,8 +2031,7 @@ $(document).ready(function() {
       <div class="main">
          <div class="main_banner" id="main_banner">
             
-		        <img src="https://new.honeymoonresort.co.kr/resources/expo_upload/4a6b5d15-fa99-4b23-9b47-2f230450e943.jpg" alt="main.jpg">
-</div>
+		        <img src="https://new.honeymoonresort.co.kr/resources/expo_upload/b74b9735-dbf7-4be1-ae83-41e797380074.jpg" alt="main.jpg">
 <!-- ===== 여기부터: 호텔엔투어 겨울방학 8비트 게임 (Design © 정지희 과장) =====
      PC 박람회 페이지(pcexpo.do)와 모바일 박람회 페이지(expo.do) 모두 같은 코드를 넣으면 됩니다. -->
 <style>
@@ -2058,7 +2061,7 @@ $(document).ready(function() {
   })();
 </script>
 <!-- ===== 여기까지 ===== -->
-<div class="main_banner">
+
 		    
 		        <img src="https://new.honeymoonresort.co.kr/resources/expo_upload/ac9751ac-8675-4dc1-a26d-66ec36b744b7.jpg" alt="호투 박람회페이지.jpg">
 		    
@@ -2335,7 +2338,8 @@ function showSideBar() {
 
 <!-- 아래의 코드를 <body> 여는 태그 다음에 넣어주세요. -->
 <!-- Google Tag Manager (noscript) -->
-
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJZWGGLJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 
